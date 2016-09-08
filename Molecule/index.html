@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Molecule Component</title>
+    <script src="./static/jquery-1.10.2.js"></script>
+    <script src="./static/molecule.js"></script>
+</head>
+<body>
+    <div molecule-def="AmazingMolecule">
+        <input value="Hello World"><button id="bnUpperCase">Upper Case</button>
+        <script>
+            // MOLECULE_DEF
+            function AmazingMolecule(){
+                this.$el.find('input').val(this.$el.data('text'));
+                this.$el.find('#bnUpperCase').click(function(){
+                    var $tx = $(this).parent().find('input');
+                    $tx.val($tx.val().toUpperCase());
+                })
+            }
+            // MOLECULE_DEF_END
+            Molecule.create(AmazingMolecule);
+        </script>
+    </div>
+    <!-- 创建 3 个实例 -->
+    <div molecule="AmazingMolecule" data-text="Hello World!"></div>
+    <div molecule="AmazingMolecule" data-text="Amazing Molecule!"></div>
+    <div molecule="AmazingMolecule" data-text="Hello Molecule!"></div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<div class="screen">
+    <div class="header">
+        <a class="prev" href="javascript:;">上一页</a>
+        <a class="next" href="javascript:;">下一页</a>
+    </div>
+    <div class="content">
+        <div class="slider">
+            <img [src]="contentConfig.slider.state.current.url" alt="">
+            <ul>
+                <li *ngFor="let slide of contentConfig.slider.data" 
+                    [ngClass]="{active: slide.url==contentConfig.slider.state.current.url}"
+                    (click)="sliderChange(slide)"></li>
+            </ul>
+        </div>
+        <div class="classify">
+            <img class="item" *ngFor="let item of contentConfig.classify.data" [src]="item.url" >
+        </div>
+        <div class="list">
+            <ul>
+                <li *ngFor="let item of contentConfig.list.data">
+                    <img [src]="item.url">
+                    <p>{{item.title}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

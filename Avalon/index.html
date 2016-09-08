@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Avalon Component</title>
+    <script src="./static/mod.js"></script>
+    <script>
+        if (document.namespaces) {
+            document.namespaces.add("ms", 'http://www.w3.org/1999/xhtml')
+        }
+    </script>
+
+</head>
+<body>
+    <div ms-controller="component">
+        <ms:amazing ms-attr-amazing-text="'Hello World!'"></ms:amazing>
+        <ms:amazing config="$opts"></ms:amazing>
+        <ms:amazing ms-attr-amazing-text="'Hello Avalon!'"></ms:amazing>
+        <div ms-repeat=array>
+            <ms:button ms-attr-button-a="$index+ 10"></ms:button>
+        </div>
+    </div>
+    <script>
+        require(['/components/index']);
+    </script>
+</body>
+</html>
