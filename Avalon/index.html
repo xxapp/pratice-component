@@ -8,16 +8,16 @@
         if (document.namespaces) {
             document.namespaces.add("ms", 'http://www.w3.org/1999/xhtml')
         }
-    </script>
+    </script><!--ignore-->
 
 </head>
 <body>
     <div ms-controller="component">
-        <ms:amazing ms-attr-amazing-text="'Hello World!'"></ms:amazing>
+        <ms:amazing text="Hello World!"></ms:amazing>
         <ms:amazing config="$opts"></ms:amazing>
-        <ms:amazing ms-attr-amazing-text="'Hello Avalon!'"></ms:amazing>
+        <ms:amazing text="Hello Avalon!"></ms:amazing>
         <div ms-repeat=array>
-            <ms:button ms-attr-button-a="$index+ 10"></ms:button>
+            <ms:button ms-attr-a="$index+ 10"></ms:button>
         </div>
     </div>
     <script>

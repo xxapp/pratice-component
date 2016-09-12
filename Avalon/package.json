@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.6.tar.gz",
-    "buffer": "^4.9.1",
     "fis3-hook-commonjs": "^0.1.25",
     "fis3-hook-node_modules": "^2.2.8",
     "fis3-postpackager-loader": "^2.1.3"

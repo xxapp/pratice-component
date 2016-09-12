@@ -3,7 +3,9 @@ fis.hook('commonjs', {
 });
 
 fis.unhook('components'); 
-fis.hook('node_modules');
+fis.hook('node_modules', {
+  shimBuffer: false
+});
 
 // 设置成是模块化 js, 编译后会被 define 包裹。
 fis.match('/{node_modules,components}/**.js', {
