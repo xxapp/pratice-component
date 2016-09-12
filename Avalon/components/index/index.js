@@ -9,7 +9,7 @@ avalon.component("ms:button", {
     $template: '<button type="button" ms-attr-id="a">{{a}}</button>'
 });
 
-avalon.component('ms:amazing', {
+avalon.component('ms:amazingAvalon', {
     text: 'Hello World',
     $replace: 1,
     $init: function (vm) {
