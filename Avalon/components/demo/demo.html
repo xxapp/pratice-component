@@ -1,0 +1,66 @@
+<div class="row" ms-controller="demo">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header bg-blue">
+                <span class="widget-caption">地区列表</span>
+            </div>
+            <div class="widget-body">
+                <div class="table-toolbar" style="padding-top:0px;padding-bottom:10px">
+                    <a href="javascript:void(0);" class="btn btn-default btn-info " ms-click="add">
+                        <span class="fa fa-plus">
+                        </span>新增地区
+                    </a>
+                </div>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ms-duplex-checked="selected_all" ms-change="toggleCheckd()">
+                                        <span class="text"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>PID</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ms-repeat-demo="list">
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ms-duplex="checked" ms-attr-value="demo.region_id">
+                                        <span class="text"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                {{ $index+1 }}
+                            </td>
+                            <td>
+                                {{ demo.region_id }}
+                            </td>
+                            <td>
+                                {{ demo.region_name }}
+                            </td>
+                            <td>
+                                {{ demo.region_parent_id }}
+                            </td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(demo)"><i class="fa fa-edit"></i> Edit</a>
+                                <a href="javascript:;" class="btn btn-danger btn-xs" ms-click="del(demo)"><i class="fa fa-trash-o"></i> Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ms:pagination current-page="1" page-count="4"></ms:pagination>
+            </div>
+        </div>
+
+    </div>
+</div>
