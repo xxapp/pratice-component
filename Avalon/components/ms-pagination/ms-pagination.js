@@ -18,6 +18,7 @@ avalon.component('ms:pagination', {
             }
         }
     },
+    $parentVmId: '',
     currentPage: 1,
     pageCount: 3,
     prevPage: avalon.noop,
