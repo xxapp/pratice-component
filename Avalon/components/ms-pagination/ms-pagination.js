@@ -22,5 +22,6 @@ avalon.component('ms:pagination', {
     currentPage: 1,
     pageCount: 3,
     prevPage: avalon.noop,
-    nextPage: avalon.noop
+    nextPage: avalon.noop,
+    $containerVmId: ''
 });

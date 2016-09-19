@@ -12,24 +12,25 @@
                             </span>新增地区
                         </a>
                     </div>
-                    <ms:table>
-                        <thead slot="content">
-                            <tr>
-                                <th>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" ms-duplex-checked="selected_all" ms-change="toggleCheckd()">
-                                            <span class="text"></span>
-                                        </label>
-                                    </div>
-                                </th>
-                                <th>#</th>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>PID</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
+                    <ms:table class="table table-hover table-bordered">
+                        <div slot="header">
+                            <ms:check-header col="region_id" width="60"></ms:check-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="$outer.$index + 1" text="#"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="region_id" text="ID"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="region_name" text="Name"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="region_parent_id" text="PID"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:action-header text="操作"></ms:action-header>
+                        </div>
                     </ms:table>
                     <ms:pagination current-page="1" page-count="4"></ms:pagination>
                 </div>

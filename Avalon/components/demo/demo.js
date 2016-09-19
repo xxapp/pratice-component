@@ -8,6 +8,9 @@ var ajax = require('/services/ajaxService');
 
 require('/components/ms-data-box');
 require('/components/ms-table');
+require('/components/ms-check-header');
+require('/components/ms-text-header');
+require('/components/ms-action-header');
 require('/components/ms-pagination');
 
 // state在这里是相当重要的一个概念，页面跳转，翻页，打开对话框（一般像添加修改这样的对话框才使用state）

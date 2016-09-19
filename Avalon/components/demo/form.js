@@ -72,7 +72,7 @@ exports.controller = avalon.controller(function($ctrl) {
             width         : 120
         });
         // 这里是将作为参数传过来的数据对象并入form vm，注意增加和修改的区别
-        avalon.mix(form, { demo: params.isEdit ? params.demo : initialData() });
+        avalon.mix(form, { demo: params.isEdit ? params.record : initialData() });
     }
     // 对应的视图销毁前
     $ctrl.$onBeforeUnload = function(oldState, newState) {

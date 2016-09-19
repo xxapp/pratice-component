@@ -235,7 +235,7 @@ bootbox.stateDialog = function (options) {
                         btn.tempCallback && (skip = btn.tempCallback(function () {
                             avalon.router.go(options.parentStateName);
                             bootbox.hideAll();
-                        }));
+                        }) !== false);
                         !skip && avalon.router.go(options.parentStateName, {}, { reload: true });
                         return skip;
                     }
@@ -247,7 +247,7 @@ bootbox.stateDialog = function (options) {
         tempCallback = options.onEscape;
         options.onEscape = function () {
             tempCallback && tempCallback();
-            avalon.router.go(options.parentStateName, {}, { reload: true });
+            //avalon.router.go(options.parentStateName, {}, { reload: true });
         }
     }
     var el_dialog = bootbox.dialog(options);

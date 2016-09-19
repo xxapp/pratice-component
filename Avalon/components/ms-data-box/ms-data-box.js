@@ -10,15 +10,6 @@ avalon.component('ms:dataBox', {
     $template: '{{content|html}}',
     $replace: 0,
     $init: function (vm) {
-        vm.toggleCheckd = function () {
-            if (this.checked) {
-                avalon.each(vm.list, function(i, v){
-                    vm.checked.ensure(v['region_id']);
-                });
-            } else {
-                vm.checked.clear();
-            }
-        }
         vm.add = function () {
             avalon.router.go('root.demo.form', {
                 isEdit: false
@@ -42,7 +33,7 @@ avalon.component('ms:dataBox', {
         }
         vm.loadData = function (cb) {
             ajax({
-                url: 'http://127.0.0.1:8081/api/user',
+                url: '/api/user',
                 type: 'get',
                 data: {
                 }
@@ -51,23 +42,14 @@ avalon.component('ms:dataBox', {
                 beyond.hideLoading();
                 // 更新vm
                 vm.list = result.list;
-                vm.checked.clear;
-                vm.selected_all = false;
+                vm.checked.clear();
             });
         }
-
-        vm.$watch('checked.length', function (newV) {
-            if (newV == vm.list.size()) {
-                vm.selected_all = true;
-            } else {
-                vm.selected_all = false;
-            }
-        });
     },
     $childReady: function (vm, e) {
         // 在所有子组件上面保存容器组件的vmId
         for (var i in vm.$refs) {
-            vm.$refs[i].$parentVmId = vm.$id;
+            vm.$refs[i].$containerVmId = vm.$id;
         }
     },
     $ready: function (vm) {
@@ -75,8 +57,8 @@ avalon.component('ms:dataBox', {
     },
     list: [],
     checked: [],
-    selected_all: false,
-    toggleCheckd: avalon.noop,
+    actionBtns: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> Edit</a> ' + 
+                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="del(el)"><i class="fa fa-trash-o"></i> Delete</a>',
     add: avalon.noop,
     edit: avalon.noop,
     del: avalon.noop,

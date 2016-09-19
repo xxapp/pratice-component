@@ -20,7 +20,7 @@ exports.controller = avalon.controller(function($ctrl) {
     // 进入视图
     $ctrl.$onEnter = function() {
         ajax({
-            url: 'http://127.0.0.1:8081/api/loged',
+            url: '/api/loged',
             type: 'get'
         }).then(function (result) {
             $('.login-area').removeClass('hidden').addClass('animated flipInX');
