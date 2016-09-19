@@ -12,6 +12,7 @@ require('/components/ms-check-header');
 require('/components/ms-text-header');
 require('/components/ms-action-header');
 require('/components/ms-pagination');
+require('/components/ms-dialog')
 
 // state在这里是相当重要的一个概念，页面跳转，翻页，打开对话框（一般像添加修改这样的对话框才使用state）
 // 切换状态用avalon.router.go方法

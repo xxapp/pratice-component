@@ -1,7 +1,9 @@
 var avalon = require('avalon');
 var beyond = require('/vendor/beyond');
 var Notify = beyond.Notify;
-var ajax = require('/services/ajaxService');
+var bootbox = require('bootbox.js/bootbox');
+
+var store = require('/services/storeService.js');
 
 var currentState = mmState.currentState;
 avalon.component('ms:dataBox', {
@@ -10,6 +12,8 @@ avalon.component('ms:dataBox', {
     $template: '{{content|html}}',
     $replace: 0,
     $init: function (vm) {
+        if (!vm.store) { avalon.log('没有配置数据源，<ms:data-box store="demo">......') }
+
         vm.add = function () {
             avalon.router.go('root.demo.form', {
                 isEdit: false
@@ -23,21 +27,16 @@ avalon.component('ms:dataBox', {
             });
         }
         vm.del = function (record) {
-            bootbox.confirm("Are you sure? " + record.region_name, function (result) {
+            bootbox.confirm("确定删除?", function (result) {
                 if (result) {
                     alert(record.region_id);
-                    avalon.router.go(currentState.stateName, { query: currentState.query });
+                    vm.loadData();
                     Notify('删除成功', 'top-right', '5000', 'success', 'fa-check', true);
                 }
             });
         }
         vm.loadData = function (cb) {
-            ajax({
-                url: '/api/user',
-                type: 'get',
-                data: {
-                }
-            }).then(function (result) {
+            store[vm.store].list().then(function (result) {
                 cb && cb();
                 beyond.hideLoading();
                 // 更新vm
@@ -55,6 +54,7 @@ avalon.component('ms:dataBox', {
     $ready: function (vm) {
         vm.onInit(vm);
     },
+    store: '',
     list: [],
     checked: [],
     actionBtns: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> Edit</a> ' + 

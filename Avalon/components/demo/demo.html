@@ -1,6 +1,6 @@
 <div class="row" ms-controller="demo">
     <div class="col-xs-12 col-md-12">
-        <ms:data-box $id="data-box_demo" on-init="dataBoxInit">
+        <ms:data-box $id="data-box_demo" on-init="dataBoxInit" store='demo'>
             <div slot="content" class="widget">
                 <div class="widget-header bg-blue">
                     <span class="widget-caption">地区列表</span>
@@ -35,6 +35,35 @@
                     <ms:pagination current-page="1" page-count="4"></ms:pagination>
                 </div>
             </div>
+            <ms:dialog>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form role="form">
+                            <div class="form-group">
+                                <span class="input-icon icon-right">
+                                    <input type="text" class="form-control" placeholder="ID" ms-duplex="demo.region_id">
+                                    <i class="glyphicon glyphicon-user circular"></i>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon icon-right">
+                                    <input type="text" class="form-control" placeholder="Address" ms-duplex="demo.region_name">
+                                    <i class="fa fa-envelope-o circular"></i>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon icon-right">
+                                    <input type="text" class="form-control" placeholder="PID" ms-duplex="demo.region_parent_id">
+                                    <i class="fa fa-lock circular"></i>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="file_upload_1">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ms:dialog>
         </ms:data-box>
     </div>
 </div>
