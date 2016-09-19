@@ -20,6 +20,7 @@ require('/components/ms-dialog')
 var currentState = mmState.currentState;
 var demo = avalon.define({
     $id: 'demo',
+    dialogShow: false,
     dataBoxInit: function (vm) {
         vm.loadData(function () {
             // 隐藏加载动画

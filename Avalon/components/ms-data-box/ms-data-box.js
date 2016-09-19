@@ -15,9 +15,10 @@ avalon.component('ms:dataBox', {
         if (!vm.store) { avalon.log('没有配置数据源，<ms:data-box store="demo">......') }
 
         vm.add = function () {
-            avalon.router.go('root.demo.form', {
-                isEdit: false
-            });
+            // avalon.router.go('root.demo.form', {
+            //     isEdit: false
+            // });
+            avalon.vmodels.demo.dialogShow = true;
         }
         vm.edit = function (record) {
             avalon.router.go('root.demo.form', {
