@@ -36,7 +36,7 @@ var demo = avalon.define({
     'data-box_config': {
         store: 'demo',
         dialogId: 'dialog_demo',
-        actionBtns: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
+        actionBtns: '<a href="javascript:;" class="btn btn-link btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
                 '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="del(el)"><i class="fa fa-trash-o"></i> 删除</a>',
         processData: function (package, post) {
             // package包含一些状态数据和要提交要用到的数据
@@ -53,25 +53,19 @@ var demo = avalon.define({
         });
     }
 });
+var form = avalon.define({
+    $id: 'demo.form'
+});
 
 // 导出模板
 exports.view = __inline('./demo.html');
 // 导出逻辑
 exports.controller = avalon.controller(function($ctrl) {
-    // 一个状态是有生命周期的
-    // 以下定义的几个回调就是生命周期的某一瞬间执行
-
-    // 视图渲染后，意思是avalon.scan完成
     $ctrl.$onRendered = function() {
-        //rs();
-        //return false;
     }
-    // 进入视图
     $ctrl.$onEnter = function(params, rs) {
     }
-    // 对应的视图销毁前
     $ctrl.$onBeforeUnload = function(oldState, newState) {
     }
-    // 指定一个avalon.scan视图的vmodels，vmodels = $ctrl.$vmodels.concact(DOM树上下文vmodels)
     $ctrl.$vmodels = [];
 });

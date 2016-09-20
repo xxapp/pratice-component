@@ -49,6 +49,7 @@ avalon.component('ms:dataBox', {
                 beyond.hideLoading();
                 // 更新vm
                 vm.list = result.list;
+                vm.total = result.total;
                 vm.checked.clear();
             });
         }
@@ -95,6 +96,7 @@ avalon.component('ms:dataBox', {
         start: 0,
         limit: 10
     },
+    total: 1,
     $dirtyQuery: {},
     checked: [],
     actionBtns: '',

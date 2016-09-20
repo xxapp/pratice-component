@@ -57,7 +57,7 @@ avalon.component('ms:table', {
             var expr = 'el.' + n.name;
             if (n.name && ~n.name.indexOf('$index')) {
                 expr = n.name;
-            } else if (n.name && /<a[^>]*>([\s\S]*?)<\/a>/.test(n.name)) {
+            } else if (n.type == 'action') {
                 // 如果是a标签，也不加修饰
                 expr = n.name;
             }
