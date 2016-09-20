@@ -53,6 +53,7 @@ avalon.state('root', {
     }
 });
 
+// demo
 avalon.state('root.demo', {
     url: 'demo',
     views: {
@@ -62,13 +63,22 @@ avalon.state('root.demo', {
         }
     },
     ignoreChange: function (type) {
-        console.log(arguments);
         return !!type;
     }
 });
-avalon.state('root.demo.form', {
-    template: ' ',
-    controllerProvider: require.async('/components/demo/form', 'controller')
+
+// 商品类别
+avalon.state('root.category', {
+    url: 'category',
+    views: {
+        "content@": {
+            templateProvider: require.async('/components/gf-category', 'view'),
+            controllerProvider: require.async('/components/gf-category', 'controller')
+        }
+    },
+    ignoreChange: function (type) {
+        return !!type;
+    }
 });
 
 // mmState全局配置

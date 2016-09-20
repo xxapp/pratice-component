@@ -39,5 +39,10 @@ module.exports = function (options) {
         dataType: 'json',
         cache: false
     };
-    return $.ajax($.extend(true, defaultOptions, options));
+    return $.ajax($.extend(true, defaultOptions, options)).then(function (r) {
+        if (!r.list) {
+            r.list = r.rows;
+        }
+        return r;
+    });
 };

@@ -18,6 +18,12 @@ var menu = [{
         icon: 'glyphicon-home',
         href: '#!/demo'
     }]
+}, {
+    name: 'category',
+    title: '商品类别管理',
+    stateName: 'root.category',
+    icon: 'glyphicon-category',
+    href: '#!/category'
 }];
 
 // 根据权限过滤菜单
