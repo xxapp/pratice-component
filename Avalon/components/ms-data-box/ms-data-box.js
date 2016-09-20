@@ -43,8 +43,9 @@ avalon.component('ms:dataBox', {
                 }
             });
         }
-        vm.loadData = function (cb) {
-            entityStore.list().then(function (result) {
+        vm.loadData = function (cb, params) {
+            vm.$query = avalon.mix(vm.$query, params);
+            entityStore.list(vm.$query).then(function (result) {
                 cb && cb();
                 beyond.hideLoading();
                 // 更新vm
@@ -91,6 +92,10 @@ avalon.component('ms:dataBox', {
     store: '',
     dialogId: '',
     list: [],
+    $query: {
+        start: 0,
+        limit: 10
+    },
     checked: [],
     actionBtns: '',
     add: avalon.noop,

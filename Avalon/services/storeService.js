@@ -15,8 +15,7 @@ exports.demo = {
         return ajax({
             url: '/api/demo',
             type: 'get',
-            data: {
-            }
+            data: params
         });
     },
     insert: function (params) {

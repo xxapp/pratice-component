@@ -6,21 +6,26 @@ avalon.component('ms:pagination', {
     $replace: 1,
     $init: function (vm) {
         vm.prevPage = function () {
-            if (vm.currentPage !== 1) {
-                // 进入前一页，state不变，query中的page参数减一
-                avalon.router.go(currentState.stateName, { query: { page: --vm.currentPage } });
+            var containerVm = avalon.vmodels[vm.$containerVmId];
+            if (vm.currentPage > 1) {
+                containerVm.loadData(avalon.noop, {
+                    start: --vm.currentPage-1,
+                    limit: vm.pageCount
+                });
             }
         }
         vm.nextPage = function () {
-            if (vm.currentPage !== vm.pageCount) {
-                // 进入前一页，state不变，query中的page参数加一
-                avalon.router.go(currentState.stateName, { query: { page: ++vm.currentPage } });
+            var containerVm = avalon.vmodels[vm.$containerVmId];
+            if (vm.currentPage < vm.pageCount) {
+                containerVm.loadData(avalon.noop, {
+                    start: ++vm.currentPage-1,
+                    limit: vm.pageCount
+                });
             }
         }
     },
-    $parentVmId: '',
     currentPage: 1,
-    pageCount: 3,
+    pageCount: 10,
     prevPage: avalon.noop,
     nextPage: avalon.noop,
     $containerVmId: ''
