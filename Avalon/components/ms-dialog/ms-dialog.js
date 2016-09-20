@@ -9,19 +9,19 @@ avalon.component('ms:dialog', {
     $init: function (vm) {
         vm.$watch('show', function (newV) {
             if (newV) {
-                var params = {isEdit: false};
                 vm.$dialog = bootbox.dialog({
                     message: vm.$content,
-                    title: params.isEdit ? '修改地址' : '新增地址',
-                    className: params.isEdit ? 'modal-primary' : 'modal-success',
+                    title: vm.isEdit ? '修改' : '新增',
+                    className: vm.isEdit ? 'modal-primary' : 'modal-success',
                     buttons: {
                         save: {
                             label: '保存',
                             className: "btn-blue",
-                            callback: function (close) {
-                                console.log(params.isEdit ? '修改' : '新增', form.demo.$model);
-                                close();
-                                return false;
+                            callback: function () {
+                                vm.$post({
+                                    isEdit: vm.isEdit,
+                                    record: vm.record.$model
+                                });
                             }
                         },
                         cancel: {
@@ -32,16 +32,20 @@ avalon.component('ms:dialog', {
                         }
                     }
                 }).on('hidden.bs.modal', function () { vm.show = false; });
+                avalon.scan(vm.$dialog.get(0));
             } else {
                 vm.$dialog && vm.$dialog.find('.bootbox-close-button').trigger('click');
             }
         });
     },
     $ready: function (vm, el) {
-        vm.$content = $.trim($('<div>').append(vm.content).html());
+        vm.$content = $.trim($('<div>').append(vm.content).children().first().attr('ms-controller', vm.$id).parent().html());
     },
     $content: '',
     $dialog: null,
     show: false,
-    containerVmId: ''
+    isEdit: false,
+    record: {},
+    containerVmId: '',
+    $post: avalon.noop
 });

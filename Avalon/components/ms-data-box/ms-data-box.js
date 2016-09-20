@@ -5,6 +5,7 @@ var bootbox = require('bootbox.js/bootbox');
 
 var store = require('/services/storeService.js');
 
+var entityStore;
 var currentState = mmState.currentState;
 avalon.component('ms:dataBox', {
     $solt: 'content',
@@ -12,38 +13,70 @@ avalon.component('ms:dataBox', {
     $template: '{{content|html}}',
     $replace: 0,
     $init: function (vm) {
-        if (!vm.store) { avalon.log('没有配置数据源，<ms:data-box store="demo">......') }
+        var dialogVm = avalon.vmodels[vm.dialogId];
+        entityStore = store[vm.store];
+        if (!vm.store) { avalon.error('没有配置数据源，<ms:data-box store="demo">......') }
+        if (!entityStore) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }
+        if (!dialogVm) { avalon.error('配置了dialogId:[' + vm.dialogId + ']，但是没找到对应的组件vm') }
 
         vm.add = function () {
-            // avalon.router.go('root.demo.form', {
-            //     isEdit: false
-            // });
-            avalon.vmodels.demo.dialogShow = true;
+            var dialogVm = avalon.vmodels[vm.dialogId];
+            dialogVm.isEdit = false;
+            avalon.mix(dialogVm, { record: entityStore.initialData() });
+            dialogVm.show = true;
         }
         vm.edit = function (record) {
-            avalon.router.go('root.demo.form', {
-                isEdit: true,
-                id: record.$model.region_id,
-                record: record.$model
-            });
+            var dialogVm = avalon.vmodels[vm.dialogId];
+            dialogVm.isEdit = true;
+            avalon.mix(dialogVm, { record: record.$model });
+            dialogVm.show = true;
         }
         vm.del = function (record) {
             bootbox.confirm("确定删除?", function (result) {
                 if (result) {
-                    alert(record.region_id);
-                    vm.loadData();
-                    Notify('删除成功', 'top-right', '5000', 'success', 'fa-check', true);
+                    entityStore.del(record[entityStore.key]).then(function (r) {
+                        if (r.code == '0') {
+                            vm.loadData();
+                            Notify('删除成功', 'top-right', '5000', 'success', 'fa-check', true);
+                        }
+                    });
                 }
             });
         }
         vm.loadData = function (cb) {
-            store[vm.store].list().then(function (result) {
+            entityStore.list().then(function (result) {
                 cb && cb();
                 beyond.hideLoading();
                 // 更新vm
                 vm.list = result.list;
                 vm.checked.clear();
             });
+        }
+        dialogVm.$post = function (package) {
+            vm.processData(package, function (handleResult) {
+                if (!package.isEdit) {
+                    entityStore.insert(package.record).then(function (r) {
+                        if (r.code == '0') {
+                            Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
+                        }
+                        handleResult(r);
+                    });
+                } else {
+                    entityStore.update(package.record).then(function (r) {
+                        if (r.code == '0') {
+                            Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
+                        }
+                        handleResult(r);
+                    });
+                }
+            });
+            // 初始化上传插件
+            // $("#file_upload_1").uploadify({
+            //     height        : 30,
+            //     swf           : __uri('/vendor/uploadify/uploadify.swf'),
+            //     uploader      : configService.springApi.url + '/uploadify/uploadify.php',
+            //     width         : 120
+            // });
         }
     },
     $childReady: function (vm, e) {
@@ -56,12 +89,13 @@ avalon.component('ms:dataBox', {
         vm.onInit(vm);
     },
     store: '',
+    dialogId: '',
     list: [],
     checked: [],
-    actionBtns: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> Edit</a> ' + 
-                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="del(el)"><i class="fa fa-trash-o"></i> Delete</a>',
+    actionBtns: '',
     add: avalon.noop,
     edit: avalon.noop,
     del: avalon.noop,
-    loadData: avalon.noop
+    loadData: avalon.noop,
+    processData: avalon.noop
 });
