@@ -7,6 +7,8 @@ var bootbox = require('bootbox.js/bootbox');
 var ajax = require('/services/ajaxService');
 
 require('/components/ms-data-box');
+require('/components/ms-search-item');
+require('/components/ms-search-button');
 require('/components/ms-table');
 require('/components/ms-check-header');
 require('/components/ms-text-header');

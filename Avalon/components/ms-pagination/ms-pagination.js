@@ -1,6 +1,5 @@
 var avalon = require('avalon');
 
-var currentState = mmState.currentState;
 avalon.component('ms:pagination', {
     $template: __inline('./ms-pagination.html'),
     $replace: 1,

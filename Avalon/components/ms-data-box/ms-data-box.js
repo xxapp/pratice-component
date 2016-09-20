@@ -6,7 +6,6 @@ var bootbox = require('bootbox.js/bootbox');
 var store = require('/services/storeService.js');
 
 var entityStore;
-var currentState = mmState.currentState;
 avalon.component('ms:dataBox', {
     $solt: 'content',
     content: '',
@@ -96,6 +95,7 @@ avalon.component('ms:dataBox', {
         start: 0,
         limit: 10
     },
+    $dirtyQuery: {},
     checked: [],
     actionBtns: '',
     add: avalon.noop,
