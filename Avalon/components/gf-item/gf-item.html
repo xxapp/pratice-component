@@ -1,0 +1,139 @@
+<div class="row" ms-controller="gf-item">
+    <div class="col-xs-12 col-md-12">
+        <ms:dialog $id="dialog_item" ms-skip>
+            <div class="row">
+                <div class="col-md-12">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>商品名称</label>
+                            <input type="text" class="form-control" ms-duplex="record.name">
+                        </div>
+                        <div class="form-group">
+                            <label>商品分类</label>
+                            <select class="form-control" ms-duplex="record.catalog">
+                                <option value="1">好旅游品</option>
+                                <option value="2">好商品</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>商品单价</label>
+                            <input type="text" class="form-control" ms-duplex="record.price">
+                        </div>
+                        <div class="form-group">
+                            <label>库存</label>
+                            <input type="text" class="form-control" ms-duplex="record.store_count">
+                        </div>
+                        <div class="form-group">
+                            <label>大缩略图</label>
+                            <input type="text" class="form-control" ms-duplex="record.tag.large_thumb">
+                        </div>
+                        <div class="form-group">
+                            <label>缩略图</label>
+                            <input type="text" class="form-control" ms-duplex="record.tag.thumb">
+                        </div>
+                        <div class="form-group">
+                            <label>商品详情</label>
+                            <textarea class="form-control" rows="4" ms-duplex="record.tag.description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>浏览量</label>
+                            <input type="text" class="form-control" ms-duplex="record.view_count">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ms:dialog>
+        <ms:dialog $id="dialog_item_push" ms-skip>
+            <div class="row">
+                <div class="col-md-12">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>标题</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>副标题</label>
+                            <textarea class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>标签</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>商品分类</label>
+                            <select class="form-control">
+                                <option value="1">大图</option>
+                                <option value="2">小图</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>上线时间</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>推送内容</label>
+                            <input type="text" class="form-control" disabled ms-duplex="record.pushContent">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </ms:dialog>
+        <ms:data-box $id="data-box_item" on-init="dataBoxInit" config="data-box_config">
+            <div slot="content" class="widget">
+                <div class="widget-header bg-blue">
+                    <span class="widget-caption">商品列表</span>
+                </div>
+                <div class="widget-body">
+                    <form class="form-inline">
+                        <ms:search-item label="名称" col="name"></ms:search-item>
+                        <ms:search-item label="类别" col="catalog"></ms:search-item>
+                        <ms:search-item label="单价" col="price"></ms:search-item>
+                    </form>
+                    <br>
+                    <form class="form-inline">
+                        <ms:search-item label="状态" col="state"></ms:search-item>
+                        <ms:search-button class="btn btn-info">搜索</ms:search-button>
+                    </form>
+                    <div class="table-toolbar">
+                        <button class="btn btn-info" ms-click="add">
+                            <span class="fa fa-plus">
+                            </span>新增商品
+                        </button>
+                        <button class="btn btn-info" ms-click="upShelves">
+                            <span class="fa fa-plus">
+                            </span>批量上架
+                        </button>
+                        <button class="btn btn-info" ms-click="downShelves">
+                            <span class="fa fa-plus">
+                            </span>批量下架
+                        </button>
+                    </div>
+                    <ms:table class="table table-hover table-bordered">
+                        <div slot="header">
+                            <ms:check-header col="id" width="60"></ms:check-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="name" text="商品名称"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="catalog" text="类别"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="price" text="单价"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="store_count" text="剩余数量"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:text-header col="state" text="状态"></ms:text-header>
+                        </div>
+                        <div slot="header">
+                            <ms:action-header text="操作"></ms:action-header>
+                        </div>
+                    </ms:table>
+                    <ms:pagination current-page="1" page-count="4"></ms:pagination>
+                </div>
+            </div>
+        </ms:data-box>
+    </div>
+</div>

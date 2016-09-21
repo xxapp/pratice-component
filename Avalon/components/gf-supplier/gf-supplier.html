@@ -1,6 +1,6 @@
-<div class="row" ms-controller="gfcategory">
+<div class="row" ms-controller="gf-supplier">
     <div class="col-xs-12 col-md-12">
-        <ms:dialog $id="dialog_category" ms-skip>
+        <ms:dialog $id="dialog_supplier" ms-skip>
             <div class="row">
                 <div class="col-md-12">
                     <form role="form">
@@ -11,10 +11,10 @@
                 </div>
             </div>
         </ms:dialog>
-        <ms:data-box $id="data-box_category" on-init="dataBoxInit" config="data-box_config">
+        <ms:data-box $id="data-box_supplier" on-init="dataBoxInit" config="data-box_config">
             <div slot="content" class="widget">
                 <div class="widget-header bg-blue">
-                    <span class="widget-caption">商品类别列表</span>
+                    <span class="widget-caption">供货人列表</span>
                 </div>
                 <div class="widget-body">
                     <form class="form-inline">
@@ -24,7 +24,7 @@
                     <div class="table-toolbar">
                         <button class="btn btn-info" ms-click="add">
                             <span class="fa fa-plus">
-                            </span>新增类别
+                            </span>新增供货人
                         </button>
                     </div>
                     <ms:table class="table table-hover table-bordered">

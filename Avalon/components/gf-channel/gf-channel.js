@@ -17,10 +17,10 @@ require('/components/ms-pagination');
 require('/components/ms-dialog')
 
 var demo = avalon.define({
-    $id: 'gfcategory',
+    $id: 'gf-channel',
     'data-box_config': {
-        store: 'category',
-        dialogId: 'dialog_category',
+        store: 'channel',
+        dialogId: 'dialog_channel',
         actionBtns: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
                 '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="del(el)"><i class="fa fa-trash-o"></i> 删除</a>',
         processData: function (package, post) {
@@ -39,11 +39,11 @@ var demo = avalon.define({
     }
 });
 var form = avalon.define({
-    $id: 'gf-category.form'
+    $id: 'gf-channel.form'
 });
 
 // 导出模板
-exports.view = __inline('./gf-category.html');
+exports.view = __inline('./gf-channel.html');
 // 导出逻辑
 exports.controller = avalon.controller(function($ctrl) {
     $ctrl.$onRendered = function() {

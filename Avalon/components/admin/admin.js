@@ -81,6 +81,46 @@ avalon.state('root.category', {
     }
 });
 
+// 物品
+avalon.state('root.item', {
+    url: 'item',
+    views: {
+        "content@": {
+            templateProvider: require.async('/components/gf-item', 'view'),
+            controllerProvider: require.async('/components/gf-item', 'controller')
+        }
+    },
+    ignoreChange: function (type) {
+        return !!type;
+    }
+});
+// 专栏
+avalon.state('root.channel', {
+    url: 'channel',
+    views: {
+        "content@": {
+            templateProvider: require.async('/components/gf-channel', 'view'),
+            controllerProvider: require.async('/components/gf-channel', 'controller')
+        }
+    },
+    ignoreChange: function (type) {
+        return !!type;
+    }
+});
+// 供货人
+avalon.state('root.supplier', {
+    url: 'supplier',
+    views: {
+        "content@": {
+            templateProvider: require.async('/components/gf-supplier', 'view'),
+            controllerProvider: require.async('/components/gf-supplier', 'controller')
+        }
+    },
+    ignoreChange: function (type) {
+        return !!type;
+    }
+});
+
 // mmState全局配置
 avalon.state.config({
     onError: function() {

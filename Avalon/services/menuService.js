@@ -24,6 +24,24 @@ var menu = [{
     stateName: 'root.category',
     icon: 'glyphicon-category',
     href: '#!/category'
+}, {
+    name: 'item',
+    title: '商品管理',
+    stateName: 'root.item',
+    icon: 'glyphicon-category',
+    href: '#!/item'
+}, {
+    name: 'channel',
+    title: '专栏管理',
+    stateName: 'root.channel',
+    icon: 'glyphicon-category',
+    href: '#!/channel'
+}, {
+    name: 'supplier',
+    title: '供货人管理',
+    stateName: 'root.supplier',
+    icon: 'glyphicon-category',
+    href: '#!/supplier'
 }];
 
 // 根据权限过滤菜单

@@ -97,7 +97,7 @@
                 "large_thumb": "http://img0.imgtn.bdimg.com/it/u=4044976779,46726623&fm=21&gp=0.jpg"
             },
             "created": "2016-09-08T16:43:00.000Z",
-            "state": "1",
+            "state": "未上架",
             "inputed": "2016-09-08T16:43:03.000Z",
             "input_employee": 1,
             "removed": null,
@@ -108,7 +108,7 @@
             "channel": null,
             "buy_count": 102,
             "real_buy_count": 6,
-            "catalog": 2
+            "catalog": "好商品"
         },
         {
             "id": 1,
@@ -128,7 +128,7 @@
                 "large_thumb": "http://img0.imgtn.bdimg.com/it/u=4044976779,46726623&fm=21&gp=0.jpg"
             },
             "created": "2016-09-06T12:02:35.000Z",
-            "state": "1",
+            "state": "未上架",
             "inputed": "2016-09-06T12:02:51.000Z",
             "input_employee": 1,
             "removed": null,
@@ -139,7 +139,7 @@
             "channel": null,
             "buy_count": 106,
             "real_buy_count": 10,
-            "catalog": 1
+            "catalog": "好旅游品"
         }
     ],
     "total": 2,
