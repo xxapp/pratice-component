@@ -97,9 +97,3 @@ fis.media('prod')
     .match('/vendor/**/*.js', {
         url: '${baseurl}/static/$0'
     })
-    .match('*', {
-        deploy: fis.plugin('http-push', {
-            receiver: 'http://121.40.216.238:8083/receiver.php',
-            to: 'C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/test'
-        })
-    });
