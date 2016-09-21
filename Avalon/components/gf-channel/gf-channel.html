@@ -4,30 +4,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <form role="form">
-                        <div class="form-group">
-                            <label>栏目名称</label>
-                            <input type="text" class="form-control" ms-duplex="record.name">
-                        </div>
-                        <div class="form-group">
-                            <label>学者姓名</label>
-                            <input type="text" class="form-control" ms-duplex="record.author_name">
-                        </div>
-                        <div class="form-group">
-                            <label>学者领域</label>
-                            <input type="text" class="form-control" ms-duplex="record.author_field">
-                        </div>
-                        <div class="form-group">
-                            <label>一句话简介</label>
-                            <input type="text" class="form-control" ms-duplex="record.brief">
-                        </div>
-                        <div class="form-group">
-                            <label>订阅数</label>
-                            <input type="text" class="form-control" ms-duplex="record.store_count">
-                        </div>
-                        <div class="form-group">
-                            <label>专栏头像图</label>
-                            <input type="text" class="form-control" ms-duplex="record.tag.thumb">
-                        </div>
+                        <ms:control-text label="栏目名称" col="name"></ms:control-text>
+                        <ms:control-text label="学者姓名" col="author_name"></ms:control-text>
+                        <ms:control-text label="学者领域" col="author_field"></ms:control-text>
+                        <ms:control-text label="一句话简介" col="brief"></ms:control-text>
+                        <ms:control-text label="订阅数" col="store_count"></ms:control-text>
+                        <ms:control-text label="专栏头像图" col="tag.thumb"></ms:control-text>
                     </form>
                 </div>
             </div>
@@ -51,24 +33,12 @@
                         </button>
                     </div>
                     <ms:table class="table table-hover table-bordered">
-                        <div slot="header">
-                            <ms:text-header col="id" text="栏目名"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="author_name" text="学者姓名"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="author_field" text="学者领域"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="brief" text="一句话简介"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="store_count" text="订阅数"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:action-header text="操作"></ms:action-header>
-                        </div>
+                        <ms:text-header slot="header" col="name" text="栏目名"></ms:text-header>
+                        <ms:text-header slot="header" col="author_name" text="学者姓名"></ms:text-header>
+                        <ms:text-header slot="header" col="author_field" text="学者领域"></ms:text-header>
+                        <ms:text-header slot="header" col="brief" text="一句话简介"></ms:text-header>
+                        <ms:text-header slot="header" col="store_count" text="订阅数"></ms:text-header>
+                        <ms:action-header slot="header"er text="操作"></ms:action-header>
                     </ms:table>
                     <ms:pagination current-page="1" page-count="4"></ms:pagination>
                 </div>

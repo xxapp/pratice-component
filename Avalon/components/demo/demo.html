@@ -4,31 +4,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <form role="form">
-                        <div class="form-group">
-                            <span class="input-icon icon-right">
-                                <input type="text" class="form-control" placeholder="ID" ms-duplex="record.region_id">
-                                <i class="glyphicon glyphicon-user circular"></i>
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <span class="input-icon icon-right">
-                                <input type="text" class="form-control" placeholder="Address" ms-duplex="record.region_name">
-                                <i class="fa fa-envelope-o circular"></i>
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <span class="input-icon icon-right">
-                                <input type="text" class="form-control" placeholder="PID" ms-duplex="record.region_parent_id">
-                                <i class="fa fa-lock circular"></i>
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" id="file_upload_1">
-                        </div>
+                        <ms:control-text label="ID" col="region_id" v-type="rule" regexp="sd/sdf/"></ms:control-text>
+                        <ms:control-text label="名称" col="region_name"></ms:control-text>
+                        <ms:control-text label="PID" col="region_parent_id"></ms:control-text>
+                        <ms:control-ueditor label="PID" col="region_parent_id"></ms:control-ueditor>
                     </form>
                 </div>
             </div>
         </ms:dialog>
+        <ms:dialog $id="dialog_upshelves"></ms:dialog>
         <ms:data-box $id="data-box_demo" on-init="dataBoxInit" config="$data-box_config">
             <div slot="content" class="widget">
                 <div class="widget-header bg-blue">
@@ -47,26 +31,14 @@
                         </button>
                     </div>
                     <ms:table class="table table-hover table-bordered">
-                        <div slot="header">
-                            <ms:check-header col="region_id" width="60"></ms:check-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="$outer.$index + 1" text="#"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="region_id" text="ID"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="region_name" text="名称"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="region_parent_id" text="PID"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:action-header text="操作"></ms:action-header>
-                        </div>
+                        <ms:check-header slot="header" col="region_id" width="60"></ms:check-header>
+                        <ms:text-header slot="header" col="$outer.$index + 1" text="#"></ms:text-header>
+                        <ms:text-header slot="header" col="region_id" text="ID"></ms:text-header>
+                        <ms:text-header slot="header" col="region_name" text="名称"></ms:text-header>
+                        <ms:text-header slot="header" col="region_parent_id" text="PID"></ms:text-header>
+                        <ms:action-header slot="header" text="操作"></ms:action-header>
                     </ms:table>
-                    <ms:pagination current-page="1" page-count="4"></ms:pagination>
+                    <ms:pagination current-page="2" page-count="4"></ms:pagination>
                 </div>
             </div>
         </ms:data-box>

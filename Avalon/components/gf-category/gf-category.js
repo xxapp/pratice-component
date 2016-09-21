@@ -14,7 +14,8 @@ require('/components/ms-check-header');
 require('/components/ms-text-header');
 require('/components/ms-action-header');
 require('/components/ms-pagination');
-require('/components/ms-dialog')
+require('/components/ms-dialog');
+require('/components/ms-control-text');
 
 var demo = avalon.define({
     $id: 'gfcategory',

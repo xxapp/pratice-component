@@ -13,10 +13,10 @@ avalon.component('ms:table', {
     $ready: function (vm, el) {
         // 因为自定义标签内部写tr或th会被忽略，因此改用div表示th并做此处理让ms-repeat正常遍历
         var tmp = [], columnConfig = [];
-        $(vm.$model.header).find('div').each(function (i, n) {
+        $(vm.$model.header).children().each(function (i, n) {
             var type;
             // 由于框架原因，父组件内部动态生成的子组件不能放进$refs,因此将需要传递的值通过属性放入子组件
-            var $cheader = $(n).children().first();
+            var $cheader = $(n);
             $cheader.attr('container-vm-id', vm.$containerVmId);
             switch ($cheader.get(0).tagName.toLowerCase()) {
                 case 'ms:text-header': {
@@ -46,7 +46,7 @@ avalon.component('ms:table', {
             }
             tmp.push({
                 width: $cheader.attr('width'),
-                content: $(n).html()
+                content: $(n).prop('outerHTML')
             });
         });
         vm.thead.clear();

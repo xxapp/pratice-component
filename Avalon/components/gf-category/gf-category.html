@@ -4,9 +4,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <form role="form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" ms-duplex="record.name">
-                        </div>
+                        <ms:control-text label="分类名称" col="name"></ms:control-text>
                     </form>
                 </div>
             </div>
@@ -28,18 +26,10 @@
                         </button>
                     </div>
                     <ms:table class="table table-hover table-bordered">
-                        <div slot="header">
-                            <ms:check-header col="id" width="60"></ms:check-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="id" text="ID"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:text-header col="name" text="名称"></ms:text-header>
-                        </div>
-                        <div slot="header">
-                            <ms:action-header text="操作"></ms:action-header>
-                        </div>
+                        <ms:check-header slot="header" col="id" width="60"></ms:check-header>
+                        <ms:text-header slot="header" col="id" text="ID"></ms:text-header>
+                        <ms:text-header slot="header" col="name" text="名称"></ms:text-header>
+                        <ms:action-header slot="header" text="操作"></ms:action-header>
                     </ms:table>
                     <ms:pagination current-page="1" page-count="4"></ms:pagination>
                 </div>
