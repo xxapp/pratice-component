@@ -9,11 +9,11 @@ fis.hook('commonjs', {
 
 fis.set('baseurl', '/test');
 fis.set('local_server', 'http://127.0.0.1:7070/cargotmall/');
-fis.set('remote_server', 'http://schy.youarebug.com/cargotmall/');
+fis.set('remote_server', 'http://127.0.0.1:7070/cargotmall/');
 fis.set('local_api', 'http://127.0.0.1:7070/cargotmall/api');
-fis.set('remote_api', 'http://schy.youarebug.com/cargotmall/api');
+fis.set('remote_api', 'http://127.0.0.1:7070/cargotmall/api');
 fis.set('local_springapi', 'http://127.0.0.1:7070/cargotmall/home/');
-fis.set('remote_springapi', 'http://schy.youarebug.com/cargotmall/home/');
+fis.set('remote_springapi', 'http://127.0.0.1:7070/cargotmall/home/');
 
 
 fis.unhook('components');
