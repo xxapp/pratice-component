@@ -18,7 +18,7 @@ require('/components/ms-dialog')
 
 var demo = avalon.define({
     $id: 'gf-supplier',
-    'data-box_config': {
+    '$data-box_config': {
         store: 'supplier',
         dialogId: 'dialog_supplier',
         actionBtns: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 

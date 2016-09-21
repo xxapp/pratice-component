@@ -33,7 +33,7 @@ var currentState = mmState.currentState;
  */
 var demo = avalon.define({
     $id: 'demo',
-    'data-box_config': {
+    '$data-box_config': {
         store: 'demo',
         dialogId: 'dialog_demo',
         actionBtns: '<a href="javascript:;" class="btn btn-link btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
