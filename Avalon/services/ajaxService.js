@@ -16,9 +16,9 @@ $(document).ajaxComplete(function (event, xhr, settings) {
                          location.href = "/login.html";
                      }
                  });
-            } else if (result.code !== '0') {
+            } else if (result.error) {
                 beyond.hideLoading();
-                Notify(result.message, 'top-right', '5000', 'danger', 'fa-bolt', true);
+                Notify(result.error.message, 'top-right', '5000', 'danger', 'fa-bolt', true);
             }
         }
     }else if(xhr.status == undefined) 
@@ -39,10 +39,24 @@ module.exports = function (options) {
         dataType: 'json',
         cache: false
     };
-    return $.ajax($.extend(true, defaultOptions, options)).then(function (r) {
-        if (!r.list) {
-            r.list = r.rows;
+    function process(r) {
+        var str = {};
+        if (r.rows) {
+            str = r;
+            str.code = '0';
+            str.list = r.rows;
+            delete str.rows;
+        } else {
+            if (!r.error) {
+                str.code = '0';
+                str.data = r;
+            } else {
+                str.code = '1';
+                str.message = r.message;
+            }
         }
-        return r;
-    });
+        console.log(str);
+        return str;
+    }
+    return $.ajax($.extend(true, defaultOptions, options)).then(process);
 };
