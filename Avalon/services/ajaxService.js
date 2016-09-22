@@ -39,24 +39,41 @@ module.exports = function (options) {
         dataType: 'json',
         cache: false
     };
-    function process(r) {
-        var str = {};
-        if (r.rows) {
-            str = r;
-            str.code = '0';
-            str.list = r.rows;
-            delete str.rows;
-        } else {
-            if (!r.error) {
-                str.code = '0';
-                str.data = r;
-            } else {
-                str.code = '1';
-                str.message = r.message;
-            }
-        }
-        console.log(str);
-        return str;
-    }
-    return $.ajax($.extend(true, defaultOptions, options)).then(process);
+    options.data = processRequest(options.data);
+    options = $.extend(true, defaultOptions, options);
+    return $.ajax(options).then(processResponse);
 };
+
+// 标准化传给后台的参数
+function processRequest(r) {
+    var str = r || {};
+    if (str.start || str.limit) {
+        str.page = {
+            start: str.start || 0,
+            limit: str.limit || 15
+        };
+        delete str.start;
+        delete str.limit;
+    }
+    return str;
+}
+
+// 标准化后台相应数据格式
+function processResponse(r) {
+    var str = {};
+    if (r.rows) {
+        str = r;
+        str.code = '0';
+        str.list = r.rows;
+        delete str.rows;
+    } else {
+        if (!r.error) {
+            str.code = '0';
+            str.data = r;
+        } else {
+            str.code = '1';
+            str.message = r.message;
+        }
+    }
+    return str;
+}
