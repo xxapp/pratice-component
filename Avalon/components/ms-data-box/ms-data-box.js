@@ -13,24 +13,25 @@ avalon.component('ms:dataBox', {
     $replace: 0,
     $init: function (vm) {
         var dialogVm = avalon.vmodels[vm.dialogId];
+
         entityStore = store[vm.store];
         if (!vm.store) { avalon.error('没有配置数据源，<ms:data-box store="demo">......') }
         if (!entityStore) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }
         if (!dialogVm) { avalon.error('配置了dialogId:[' + vm.dialogId + ']，但是没找到对应的组件vm') }
 
-        vm.add = function () {
+        vm.actions.add = function () {
             var dialogVm = avalon.vmodels[vm.dialogId];
             dialogVm.isEdit = false;
             avalon.mix(dialogVm, { record: entityStore.initialData() });
             dialogVm.show = true;
         }
-        vm.edit = function (record) {
+        vm.actions.edit = function (record) {
             var dialogVm = avalon.vmodels[vm.dialogId];
             dialogVm.isEdit = true;
             avalon.mix(dialogVm, { record: record.$model });
             dialogVm.show = true;
         }
-        vm.del = function (record) {
+        vm.actions.del = function (record) {
             bootbox.confirm("确定删除?", function (result) {
                 if (result) {
                     entityStore.del(record[entityStore.key]).then(function (r) {
@@ -71,13 +72,6 @@ avalon.component('ms:dataBox', {
                     });
                 }
             });
-            // 初始化上传插件
-            // $("#file_upload_1").uploadify({
-            //     height        : 30,
-            //     swf           : __uri('/vendor/uploadify/uploadify.swf'),
-            //     uploader      : configService.springApi.url + '/uploadify/uploadify.php',
-            //     width         : 120
-            // });
         }
     },
     $childReady: function (vm, e) {
@@ -99,10 +93,7 @@ avalon.component('ms:dataBox', {
     total: 1,
     $dirtyQuery: {},
     checked: [],
-    actionBtns: '',
-    add: avalon.noop,
-    edit: avalon.noop,
-    del: avalon.noop,
+    actions: {},
     loadData: avalon.noop,
     processData: avalon.noop
 });

@@ -17,34 +17,38 @@ require('/components/ms-pagination');
 require('/components/ms-dialog');
 require('/components/ms-control-text');
 
-var demo = avalon.define({
+var item = avalon.define({
     $id: 'gf-item',
     '$data-box_config': {
         store: 'item',
         dialogId: 'dialog_item',
-        actionBtns: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="push(el)"><i class="fa fa-edit"></i> 推送到首页</a> ' + 
-                '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="upShelves(el)"><i class="fa fa-edit"></i> 上架</a> ' + 
-                '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
-                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="del(el)"><i class="fa fa-trash-o"></i> 删除</a>',
+        actionBtns: {
+            operation: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.upShelves(el)"><i class="fa fa-edit"></i> 上架</a> ' + 
+                '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
+                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(el)"><i class="fa fa-trash-o"></i> 删除</a>',
+            push: '<a href="javascript:;" class="btn btn-info btn-xs" ms-click="actions.push(el)"><i class="fa fa-edit"></i> 推送到首页</a>'
+        },
         processData: function (package, post) {
             // package包含一些状态数据和要提交要用到的数据
             console.log(package.isEdit ? '修改' : '新增', package.record);
             post(function (r) {
                 console.log(r);
             });
+        },
+        actions: {
+            push: function (record) {
+                avalon.vmodels['dialog_item_push'].record = {
+                    pushContent: record.name
+                };
+                avalon.vmodels['dialog_item_push'].show = true;
+            },
+            upShelves: function () {
+                Notify('上架成功', 'top-right', '5000', 'success', 'fa-check', true);
+            },
+            downShelves: function () {
+                Notify('下架成功', 'top-right', '5000', 'success', 'fa-check', true);
+            }
         }
-    },
-    push: function (record) {
-        avalon.vmodels['dialog_item_push'].record = {
-            pushContent: record.name
-        };
-        avalon.vmodels['dialog_item_push'].show = true;
-    },
-    upShelves: function () {
-        Notify('上架成功', 'top-right', '5000', 'success', 'fa-check', true);
-    },
-    downShelves: function () {
-        Notify('下架成功', 'top-right', '5000', 'success', 'fa-check', true);
     },
     dataBoxInit: function (vm) {
         vm.loadData(function () {

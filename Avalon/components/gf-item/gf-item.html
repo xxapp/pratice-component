@@ -77,15 +77,15 @@
                         <ms:search-button class="btn btn-info">搜索</ms:search-button>
                     </form>
                     <div class="table-toolbar">
-                        <button class="btn btn-info" ms-click="add">
+                        <button class="btn btn-info" ms-click="actions.add">
                             <span class="fa fa-plus">
                             </span>新增商品
                         </button>
-                        <button class="btn btn-info" ms-click="upShelves">
+                        <button class="btn btn-info" ms-click="actions.upShelves">
                             <span class="fa fa-plus">
                             </span>批量上架
                         </button>
-                        <button class="btn btn-info" ms-click="downShelves">
+                        <button class="btn btn-info" ms-click="actions.downShelves">
                             <span class="fa fa-plus">
                             </span>批量下架
                         </button>
@@ -97,6 +97,7 @@
                         <ms:text-header slot="header" col="price" text="单价"></ms:text-header>
                         <ms:text-header slot="header" col="store_count" text="剩余数量"></ms:text-header>
                         <ms:text-header slot="header" col="state" text="状态"></ms:text-header>
+                        <ms:action-header slot="header" text="推送" action-type="push"></ms:action-header>
                         <ms:action-header slot="header" text="操作"></ms:action-header>
                     </ms:table>
                     <ms:pagination current-page="1" page-count="4"></ms:pagination>

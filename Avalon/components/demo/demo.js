@@ -37,8 +37,10 @@ var demo = avalon.define({
     '$data-box_config': {
         store: 'demo',
         dialogId: 'dialog_demo',
-        actionBtns: '<a href="javascript:;" class="btn btn-link btn-xs" ms-click="edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
-                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="del(el)"><i class="fa fa-trash-o"></i> 删除</a>',
+        actionBtns: {
+            operation: '<a href="javascript:;" class="btn btn-link btn-xs" ms-click="actions.edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
+                '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(el)"><i class="fa fa-trash-o"></i> 删除</a>'
+        },
         processData: function (package, post) {
             // package包含一些状态数据和要提交要用到的数据
             console.log(package.isEdit ? '修改' : '新增', package.record);

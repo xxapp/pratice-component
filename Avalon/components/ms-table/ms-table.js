@@ -34,7 +34,7 @@ avalon.component('ms:table', {
                 case 'ms:action-header': {
                     columnConfig.push({
                         type: 'action',
-                        name: avalon.vmodels[vm.$containerVmId]['actionBtns']
+                        name: avalon.vmodels[vm.$containerVmId]['actionBtns'][$cheader.attr('action-type') || 'operation']
                     });
                 } break;
                 default: {
@@ -54,6 +54,7 @@ avalon.component('ms:table', {
 
         // 根据表头配置生成表格内容模板
         vm.tbody = $.map(columnConfig, function (n) {
+            if (!n.name) return 'check config';
             var expr = 'el.' + n.name;
             if (n.name && ~n.name.indexOf('$index')) {
                 expr = n.name;

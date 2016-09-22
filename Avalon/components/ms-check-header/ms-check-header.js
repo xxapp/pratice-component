@@ -9,7 +9,7 @@ avalon.component('ms:checkHeader', {
         vm.toggleCheckd = function () {
             if (this.checked) {
                 avalon.each(containerVm.list, function(i, v){
-                    containerVm.checked.ensure(v[vm.col]);
+                    containerVm.checked.ensure(String(v[vm.col]));
                 });
             } else {
                 containerVm.checked.clear();
