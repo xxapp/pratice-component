@@ -1,151 +1,31 @@
-var avalon = require('avalon');
-require('mmState');
-var beyond = require('/vendor/beyond');
-var ajax= require('/services/ajaxService');
-var menuService = require('/services/menuService');
-var configService = require('/services/configService');
+var avalon = require('avalonjs/dist/avalon.shim.js');
 
-// 加载jquery插件
-require('/vendor/bootstrapValidator');
-require('/vendor/bootstrapValidator/zh_CN');
-
-// root vm
-var root = avalon.define({
-    $id: 'root',
-    page: '',
-    title: '仪表板',
-    breadCrumb: [],
-    user: {}
-});
-root.$watch('title', function(v) {
-    this.title = v;
+avalon.component("ms:button", {
+    a: 1,
+    $replace: 1,
+    $ready: function() {
+        console.log("BUTTON构建完成")
+    },
+    $template: '<button type="button" ms-attr-id="a">{{a}}</button>'
 });
 
-// 所有的状态都在这里定义
-avalon.state('root', {
-    url: '/',
-    views: {
-        'header': {
-            template: require('/components/header').view,
-            controller: require('/components/header').controller
-        },
-        'sidebar': {
-            template: require('/components/sidebar').view,
-            controller: require('/components/sidebar').controller
-        },
-        'content': {
-            template: '<h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1><h1>Welcome</h1>',
-            controller: avalon.controller(function ($ctrl) {
-                // 视图渲染后，意思是avalon.scan完成
-                $ctrl.$onRendered = function() {
-                    beyond.init();
-                    beyond.hideLoading();
-                }
-                // 进入视图
-                $ctrl.$onEnter = function() {
-                }
-                // 对应的视图销毁前
-                $ctrl.$onBeforeUnload = function() {}
-                // 指定一个avalon.scan视图的vmodels，vmodels = $ctrl.$vmodels.concact(DOM树上下文vmodels)
-                $ctrl.$vmodels = []
-            })
-        }
-    }
-});
-
-// demo
-avalon.state('root.demo', {
-    url: 'demo',
-    views: {
-        "content@": {
-            templateProvider: require.async('/components/demo', 'view'),
-            controllerProvider: require.async('/components/demo', 'controller')
+avalon.component('ms:amazingAvalon', {
+    text: 'Hello World',
+    $replace: 1,
+    $init: function (vm) {
+        vm.changeToUpperCase = function () {
+            vm.text = vm.text.toUpperCase();
         }
     },
-    ignoreChange: function (type) {
-        return !!type;
-    }
+    $template: '<div><input ms-duplex="text"><button ms-click="changeToUpperCase">Upper Case</button></div>',
+    changeToUpperCase: function () {}
 });
 
-// 商品类别
-avalon.state('root.category', {
-    url: 'category',
-    views: {
-        "content@": {
-            templateProvider: require.async('/components/gf-category', 'view'),
-            controllerProvider: require.async('/components/gf-category', 'controller')
-        }
-    },
-    ignoreChange: function (type) {
-        return !!type;
+avalon.define({
+    $id: 'component',
+    array: [1,2,3],
+    $opts: {
+        text: 'Amazing Avalon'
     }
 });
-
-// 物品
-avalon.state('root.item', {
-    url: 'item',
-    views: {
-        "content@": {
-            templateProvider: require.async('/components/gf-item', 'view'),
-            controllerProvider: require.async('/components/gf-item', 'controller')
-        }
-    },
-    ignoreChange: function (type) {
-        return !!type;
-    }
-});
-// 专栏
-avalon.state('root.channel', {
-    url: 'channel',
-    views: {
-        "content@": {
-            templateProvider: require.async('/components/gf-channel', 'view'),
-            controllerProvider: require.async('/components/gf-channel', 'controller')
-        }
-    },
-    ignoreChange: function (type) {
-        return !!type;
-    }
-});
-// 供货人
-avalon.state('root.supplier', {
-    url: 'supplier',
-    views: {
-        "content@": {
-            templateProvider: require.async('/components/gf-supplier', 'view'),
-            controllerProvider: require.async('/components/gf-supplier', 'controller')
-        }
-    },
-    ignoreChange: function (type) {
-        return !!type;
-    }
-});
-
-// mmState全局配置
-avalon.state.config({
-    onError: function() {
-        console.log('mmState配置出错：', arguments)
-    },
-    onLoad: function(fromStat, toState) {
-        var breadCrumb = [], flagTree;
-        menuService.walkMenu(toState.stateName, function (item, level) {
-            if (level === 1) {
-                breadCrumb = [item];
-            } else {
-                breadCrumb.push(item);
-            }
-        });
-        if (breadCrumb.length) {
-            flagTree = breadCrumb[breadCrumb.length-1]
-            root.title = flagTree.title;
-            avalon.vmodels.sidebar.actived = flagTree.name;
-            avalon.mix(root, { breadCrumb: breadCrumb });
-        }
-    }
-})
-
-avalon.history.start({
-    fireAnchor: false
-});
-
 avalon.scan();
