@@ -6,7 +6,7 @@
     "pageSize": 0,
     "pageCount": 0,
     "total": 5,
-    "list": [
+    "rows": [
         {
             "region_id": "10",
             "region_parent_id": "1",

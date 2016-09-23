@@ -6,12 +6,12 @@ avalon.component('ms:dialog', {
     content: '',
     $template: '',
     $replace: 0,
-    $init: function (vm) {
+    $init: function (vm, el) {
         vm.$watch('show', function (newV) {
             if (newV) {
                 vm.$dialog = bootbox.dialog({
                     message: vm.$content,
-                    title: vm.isEdit ? '修改' : '新增',
+                    title: vm.title ? vm.title : vm.isEdit ? '修改' : '新增',
                     className: vm.isEdit ? 'modal-primary' : 'modal-success',
                     buttons: {
                         save: {
@@ -44,8 +44,10 @@ avalon.component('ms:dialog', {
     $content: '',
     $dialog: null,
     show: false,
+    title: '',
     isEdit: false,
     record: {},
+    state: {},
     containerVmId: '',
     $post: avalon.noop
 });

@@ -15,17 +15,15 @@ $(document).ajaxComplete(function (event, xhr, settings) {
                      if (result) {
                          location.href = "/login.html";
                      }
-                 });
+                });
             } else if (result.error) {
                 beyond.hideLoading();
                 Notify(result.error.message, 'top-right', '5000', 'danger', 'fa-bolt', true);
             }
         }
-    }else if(xhr.status == undefined) 
-    {
+    } else if (xhr.status == undefined) {
     	beyond.hideLoading();
-    }
-    else {
+    } else {
         beyond.hideLoading();
         Notify('请求错误，请联系管理员', 'top-right', '5000', 'danger', 'fa-bolt', true);
     }

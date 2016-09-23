@@ -6,16 +6,7 @@ var bootbox = require('bootbox.js/bootbox');
 
 var ajax = require('/services/ajaxService');
 
-require('/components/ms-data-box');
-require('/components/ms-search-item');
-require('/components/ms-search-button');
-require('/components/ms-table');
-require('/components/ms-check-header');
-require('/components/ms-text-header');
-require('/components/ms-action-header');
-require('/components/ms-pagination');
-require('/components/ms-dialog');
-require('/components/ms-control-text');
+require('/vendor/avx-component');
 
 var item = avalon.define({
     $id: 'gf-item',
@@ -37,10 +28,12 @@ var item = avalon.define({
         },
         actions: {
             push: function (record) {
-                avalon.vmodels['dialog_item_push'].record = {
+                var dialogVm = avalon.vmodels['dialog_item_push'];
+                dialogVm.title = '设置推送内容';
+                dialogVm.record = {
                     pushContent: record.name
                 };
-                avalon.vmodels['dialog_item_push'].show = true;
+                dialogVm.show = true;
             },
             upShelves: function () {
                 Notify('上架成功', 'top-right', '5000', 'success', 'fa-check', true);
@@ -55,10 +48,12 @@ var item = avalon.define({
             // 隐藏加载动画
             beyond.hideLoading();
         });
+        // 自定义dialog逻辑
+        avalon.vmodels['dialog_item_push'].state = {
+            text: 'text',
+            subs: [1,2,3]
+        };
     }
-});
-var form = avalon.define({
-    $id: 'gf-item.form'
 });
 
 // 导出模板

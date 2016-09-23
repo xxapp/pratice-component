@@ -5,17 +5,15 @@
                 <div class="col-md-12">
                     <form role="form">
                         <ms:control-text label="商品名称" col="name"></ms:control-text>
-                        <div class="form-group">
-                            <label>商品分类</label>
-                            <select class="form-control" ms-duplex="record.catalog">
-                                <option>好旅游品</option>
-                                <option>好商品</option>
-                            </select>
-                        </div>
+                        <ms:control-select label="商品分类" col="catalog">
+                            <option>好旅游品</option>
+                            <option>好商品</option>
+                        </ms:control-select>
                         <ms:control-text label="商品单价" col="price"></ms:control-text>
                         <ms:control-text label="库存" col="store_count"></ms:control-text>
                         <ms:control-text label="大缩略图" col="tag.large_thumb"></ms:control-text>
                         <ms:control-text label="缩略图" col="tag.thumb"></ms:control-text>
+                        <ms:control-textarea label="商品详情" col="tag.description" rows="4"></ms:control-textarea>
                         <div class="form-group">
                             <label>商品详情</label>
                             <textarea class="form-control" rows="4" ms-duplex="record.tag.description"></textarea>
@@ -29,33 +27,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <form role="form">
-                        <div class="form-group">
-                            <label>标题</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>副标题</label>
-                            <textarea class="form-control" rows="4"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>标签</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>商品分类</label>
-                            <select class="form-control">
-                                <option value="1">大图</option>
-                                <option value="2">小图</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>上线时间</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>推送内容</label>
-                            <input type="text" class="form-control" disabled ms-duplex="record.pushContent">
-                        </div>
+                        <ms:control-text label="标题" duplex="state.text" ms-repeat="state.subs"></ms:control-text>
+                        <ms:control-textarea label="副标题" rows="4"></ms:control-textarea>
+                        <ms:control-text label="标签"></ms:control-text>
+                        <ms:control-select label="商品分类">
+                            <option value="1">大图</option>
+                            <option value="2">小图</option>
+                        </ms:control-select>
+                        <ms:control-text label="上线时间"></ms:control-text>
+                        <ms:control-text label="推送内容"></ms:control-text>
                     </form>
                 </div>
             </div>

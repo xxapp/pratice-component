@@ -7,15 +7,15 @@ var avalon = require('avalon');
  * @prop duplex 自定义的绑定数据，如果同时存在则会覆盖col
  * 
  * @example
- * ``` html
- * <!-- 注：例1和例2效果是一样的 -->
- * <ms:control-text label="标题1" col="name"></ms:control-text>
- * <ms:control-text label="标题2" duplex="record['name']"></ms:control-text>
- * <ms:control-text label="标题3" duplex="state.text"></ms:control-text>
- * ```
+ *  <ms:control-select label="图片尺寸">
+ *      <option value="1">大图</option>
+ *      <option value="2">小图</option>
+ *  </ms:control-select>
  */
-avalon.component('ms:controlText', {
-    $template: __inline('./ms-control-text.html'),
+avalon.component('ms:controlSelect', {
+    $slot: 'content',
+    content: '',
+    $template: __inline('./ms-control-select.html'),
     $replace: 1,
     $$template: function (tmpl) {
         if (this.duplex) {
