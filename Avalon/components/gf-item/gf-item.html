@@ -11,13 +11,9 @@
                         </ms:control-select>
                         <ms:control-text label="商品单价" col="price"></ms:control-text>
                         <ms:control-text label="库存" col="store_count"></ms:control-text>
-                        <ms:control-text label="大缩略图" col="tag.large_thumb"></ms:control-text>
-                        <ms:control-text label="缩略图" col="tag.thumb"></ms:control-text>
+                        <ms:control-file label="大缩略图" btn-text="选择图片" col="tag.large_thumb" store="file"></ms:control-file>
+                        <ms:control-file label="缩略图" btn-text="选择图片" col="tag.thumb" store="file"></ms:control-file>
                         <ms:control-textarea label="商品详情" col="tag.description" rows="4"></ms:control-textarea>
-                        <div class="form-group">
-                            <label>商品详情</label>
-                            <textarea class="form-control" rows="4" ms-duplex="record.tag.description"></textarea>
-                        </div>
                         <ms:control-text label="浏览量" col="view_count"></ms:control-text>
                     </form>
                 </div>

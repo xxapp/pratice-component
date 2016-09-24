@@ -260,3 +260,15 @@ exports.channel = {
         });
     }
 };
+
+exports.file = {
+    insert: function (params) {
+        $.ajaxFileUpload({
+            url: '/api/file/uploadFile',
+            secureuri: false,
+            fileElementId: params.fileElementId,
+            dataType: 'json',
+            success: params.success
+        });
+    }
+};

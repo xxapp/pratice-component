@@ -10,3 +10,4 @@ require('/components/ms-dialog');
 require('/components/ms-control-text');
 require('/components/ms-control-textarea');
 require('/components/ms-control-select');
+require('/components/ms-control-file');
