@@ -72,7 +72,7 @@ function processResponse(r) {
             str.data = r;
         } else {
             str.code = '1';
-            str.message = r.message;
+            str.message = r.message || r.error;
         }
     }
     return str;

@@ -209,6 +209,7 @@ var themeprimary = getThemeColorFromCss("themeprimary"), themesecondary = getThe
 
 // 覆写require.async,改写为promise
 var require_async = require.async;
+window.require_async = require_async;
 require.async = function(n, part) {
     return function () {
         return new Promise(function(rs, rj) {
