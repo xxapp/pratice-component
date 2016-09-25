@@ -53,7 +53,9 @@ function processRequest(r) {
         delete str.start;
         delete str.limit;
     }
-    return str;
+    return {
+        params: JSON.stringify(str)
+    };
 }
 
 // 标准化后台相应数据格式
