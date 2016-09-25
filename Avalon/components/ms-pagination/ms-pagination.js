@@ -23,6 +23,10 @@ avalon.component('ms:pagination', {
             }
         }
     },
+    $ready: function (vm) {
+        var containerVm = avalon.vmodels[vm.$containerVmId];
+        containerVm.$query.limit = vm.pageCount;
+    },
     currentPage: 1,
     pageCount: 10,
     prevPage: avalon.noop,
