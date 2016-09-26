@@ -49,6 +49,10 @@ avalon.state('root', {
                 // 指定一个avalon.scan视图的vmodels，vmodels = $ctrl.$vmodels.concact(DOM树上下文vmodels)
                 $ctrl.$vmodels = []
             })
+        },
+        'layer@': {
+            template: ' ',
+            controller: avalon.controller(function () {})
         }
     }
 });
@@ -67,7 +71,6 @@ avalon.state('root.demo', {
     }
 });
 
-// 商品类别
 avalon.state('root.category', {
     url: 'category',
     views: {
@@ -81,7 +84,6 @@ avalon.state('root.category', {
     }
 });
 
-// 物品
 avalon.state('root.item', {
     url: 'item',
     views: {
@@ -94,7 +96,6 @@ avalon.state('root.item', {
         return !!type;
     }
 });
-// 专栏
 avalon.state('root.channel', {
     url: 'channel',
     views: {
@@ -107,7 +108,6 @@ avalon.state('root.channel', {
         return !!type;
     }
 });
-// 供货人
 avalon.state('root.supplier', {
     url: 'supplier',
     views: {
@@ -118,6 +118,14 @@ avalon.state('root.supplier', {
     },
     ignoreChange: function (type) {
         return !!type;
+    }
+});
+avalon.state('root.select_item', {
+    views: {
+        "layer@": {
+            templateProvider: require.async('/components/gf-select-item', 'view'),
+            controllerProvider: require.async('/components/gf-select-item', 'controller')
+        }
     }
 });
 

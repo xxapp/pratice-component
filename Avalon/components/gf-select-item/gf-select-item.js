@@ -9,7 +9,7 @@ var ajax = require('/services/ajaxService');
 require('/vendor/avx-component');
 
 var item = avalon.define({
-    $id: 'gf-item',
+    $id: 'gf-select-item',
     '$data-box_config': {
         store: 'item',
         dialogId: 'dialog_item',
@@ -29,7 +29,7 @@ var item = avalon.define({
         actions: {
             push: function (record) {
                 var dialogVm = avalon.vmodels['dialog_item_push'];
-                //dialogVm.title = '设置推送内容';
+                dialogVm.title = '设置推送内容';
                 dialogVm.record = {
                     pushContent: record.name
                 };
@@ -48,16 +48,14 @@ var item = avalon.define({
             // 隐藏加载动画
             beyond.hideLoading();
         });
-        // 自定义dialog逻辑
-        avalon.vmodels['dialog_item_push'].state = {
-            text: 'text',
-            subs: [1,2,3]
-        };
+    },
+    dialogInit: function (vm) {
+        vm.show = true;
     }
 });
 
 // 导出模板
-exports.view = __inline('./gf-item.html');
+exports.view = __inline('./gf-select-item.html');
 // 导出逻辑
 exports.controller = avalon.controller(function($ctrl) {
     $ctrl.$onRendered = function() {

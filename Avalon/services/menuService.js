@@ -20,25 +20,25 @@ var menu = [{
     }]
 }, {
     name: 'category',
-    title: '商品类别管理',
+    title: 'Category',
     stateName: 'root.category',
     icon: 'glyphicon-category',
     href: '#!/category'
 }, {
     name: 'item',
-    title: '商品管理',
+    title: 'item',
     stateName: 'root.item',
     icon: 'glyphicon-category',
     href: '#!/item'
 }, {
     name: 'channel',
-    title: '专栏管理',
+    title: 'channel',
     stateName: 'root.channel',
     icon: 'glyphicon-category',
     href: '#!/channel'
 }, {
     name: 'supplier',
-    title: '供货人管理',
+    title: 'supplier',
     stateName: 'root.supplier',
     icon: 'glyphicon-category',
     href: '#!/supplier'

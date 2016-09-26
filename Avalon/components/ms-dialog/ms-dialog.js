@@ -4,14 +4,16 @@ var bootbox = require('bootbox.js/bootbox');
 avalon.component('ms:dialog', {
     $slot: 'content',
     content: '',
+    header: '',
     $template: '',
     $replace: 0,
     $init: function (vm, el) {
         vm.$watch('show', function (newV) {
+            var header = $(vm.header).children().text();
             if (newV) {
                 vm.$dialog = bootbox.dialog({
                     message: vm.$content,
-                    title: vm.title ? vm.title : vm.isEdit ? '修改' : '新增',
+                    title: vm.title ? vm.title : header ? header : vm.isEdit ? '修改' : '新增',
                     className: vm.isEdit ? 'modal-primary' : 'modal-success',
                     buttons: {
                         save: {
