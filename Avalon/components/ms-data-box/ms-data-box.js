@@ -61,6 +61,7 @@ avalon.component('ms:dataBox', {
                         entityStore.insert(package.record).then(function (r) {
                             if (r.code == '0') {
                                 Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
+                                vm.loadData();
                             }
                             handleResult(r);
                         });
@@ -68,6 +69,7 @@ avalon.component('ms:dataBox', {
                         entityStore.update(package.record).then(function (r) {
                             if (r.code == '0') {
                                 Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
+                                vm.loadData();
                             }
                             handleResult(r);
                         });
