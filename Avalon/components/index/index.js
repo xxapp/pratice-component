@@ -120,14 +120,6 @@ avalon.state('root.supplier', {
         return !!type;
     }
 });
-avalon.state('root.select_item', {
-    views: {
-        "layer@": {
-            templateProvider: require.async('/components/gf-select-item', 'view'),
-            controllerProvider: require.async('/components/gf-select-item', 'controller')
-        }
-    }
-});
 
 // mmState全局配置
 avalon.state.config({

@@ -7,6 +7,7 @@ avalon.component('ms:dialog', {
     header: '',
     $template: '',
     $replace: 0,
+    onInit: avalon.noop,
     $init: function (vm, el) {
         vm.$watch('show', function (newV) {
             var header = $(vm.header).children().text();
@@ -15,6 +16,7 @@ avalon.component('ms:dialog', {
                     message: vm.$content,
                     title: vm.title ? vm.title : header ? header : vm.isEdit ? '修改' : '新增',
                     className: vm.isEdit ? 'modal-primary' : 'modal-success',
+                    size: vm.size,
                     buttons: {
                         save: {
                             label: '保存',
@@ -42,10 +44,12 @@ avalon.component('ms:dialog', {
     },
     $ready: function (vm, el) {
         vm.$content = $.trim($('<div>').append(vm.content).children().first().attr('ms-controller', vm.$id).parent().html());
+        vm.onInit(vm);
     },
     $content: '',
     $dialog: null,
     show: false,
+    size: '',
     title: '',
     isEdit: false,
     record: {},

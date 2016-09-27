@@ -210,15 +210,19 @@ var themeprimary = getThemeColorFromCss("themeprimary"), themesecondary = getThe
 // 覆写require.async,改写为promise
 var require_async = require.async;
 window.require_async = require_async;
-require.async = function(n, part) {
-    return function () {
-        return new Promise(function(rs, rj) {
-            require_async(n, function(m) {
-                rs(part ? m[part] : m);
-            }, function() {
-                rj();
+require.async = function(n, part, onerror) {
+    if (typeof part == 'function') {
+        return require_async.call(require, n, part, onerror);
+    } else {
+        return function () {
+            return new Promise(function(rs, rj) {
+                require_async(n, function(m) {
+                    rs(part ? m[part] : m);
+                }, function() {
+                    rj();
+                });
             });
-        });
+        }
     }
 }
 

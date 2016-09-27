@@ -7,6 +7,7 @@ var bootbox = require('bootbox.js/bootbox');
 var ajax = require('/services/ajaxService');
 
 require('/vendor/avx-component');
+var itemSelector = require('/components/gf-select-item');
 
 var demo = avalon.define({
     $id: 'gf-channel',
@@ -30,10 +31,16 @@ var demo = avalon.define({
             // 隐藏加载动画
             beyond.hideLoading();
         });
+        // 自定义dialog逻辑
+        avalon.vmodels['dialog_channel'].state = {
+            selectItem: function () {
+                itemSelector.open(function (selection) {
+                    avalon.vmodels['dialog_channel'].state.selection = selection.name;
+                });
+            },
+            selection: ''
+        };
     }
-});
-var form = avalon.define({
-    $id: 'gf-channel.form'
 });
 
 // 导出模板

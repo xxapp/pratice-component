@@ -5,19 +5,19 @@ var bootbox = require('bootbox.js/bootbox');
 
 var store = require('/services/storeService.js');
 
-var entityStore;
 avalon.component('ms:dataBox', {
     $solt: 'content',
     content: '',
     $template: '{{content|html}}',
     $replace: 0,
     $init: function (vm) {
+        var entityStore;
         var dialogVm = avalon.vmodels[vm.dialogId];
 
         entityStore = store[vm.store];
         if (!vm.store) { avalon.error('没有配置数据源，<ms:data-box store="demo">......') }
         if (!entityStore) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }
-        if (!dialogVm) { avalon.error('配置了dialogId:[' + vm.dialogId + ']，但是没找到对应的组件vm') }
+        if (vm.dialogId && !dialogVm) { avalon.error('配置了dialogId:[' + vm.dialogId + ']，但是没找到对应的组件vm') }
 
         vm.actions.add = function () {
             var dialogVm = avalon.vmodels[vm.dialogId];
@@ -54,24 +54,26 @@ avalon.component('ms:dataBox', {
                 vm.checked.clear();
             });
         }
-        dialogVm.$post = function (package) {
-            vm.processData(package, function (handleResult) {
-                if (!package.isEdit) {
-                    entityStore.insert(package.record).then(function (r) {
-                        if (r.code == '0') {
-                            Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
-                        }
-                        handleResult(r);
-                    });
-                } else {
-                    entityStore.update(package.record).then(function (r) {
-                        if (r.code == '0') {
-                            Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
-                        }
-                        handleResult(r);
-                    });
-                }
-            });
+        if (dialogVm) {
+            dialogVm.$post = function (package) {
+                vm.processData(package, function (handleResult) {
+                    if (!package.isEdit) {
+                        entityStore.insert(package.record).then(function (r) {
+                            if (r.code == '0') {
+                                Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
+                            }
+                            handleResult(r);
+                        });
+                    } else {
+                        entityStore.update(package.record).then(function (r) {
+                            if (r.code == '0') {
+                                Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
+                            }
+                            handleResult(r);
+                        });
+                    }
+                });
+            }
         }
     },
     $childReady: function (vm, e) {
