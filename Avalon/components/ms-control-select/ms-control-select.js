@@ -15,6 +15,9 @@ var store = require('/services/storeService');
  *      <option value="1">大图</option>
  *      <option value="2">小图</option>
  *  </ms:control-select>
+ * 
+ * 
+ *  <ms:control-select label="商品分类" store="category"></ms:control-select>
  */
 avalon.component('ms:controlSelect', {
     $slot: 'content',
@@ -23,35 +26,37 @@ avalon.component('ms:controlSelect', {
     $replace: 1,
     $$template: function (tmpl) {
         var vm = this;
-        var dict = store[this.store].dict || store[this.store].list;
-        dict({
-            limit: 99999
-        }).then(function (result) {
-            var options = document.createDocumentFragment()
-            result.list.forEach(function (n) {
-                var option = document.createElement('option');
-                $(option).attr('value', n[vm.colKey]).text(n[vm.colVal]);
-                options.appendChild(option);
-            });
-            vm.content = options;
-        });
+        if (vm.store) {
+            tmpl = tmpl.replace(/\{\{content\|html\}\}/g, '<option ms-repeat="options" ms-attr-value="el.' + vm.colKey + '">{{el.' + vm.colVal + '}}</option>');
+        }
+        
         if (this.duplex) {
             // 如果配置了duplex属性，则直接使用duplex的属性值绑定控件
-            return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + this.duplex + '"');
+            tmpl =  tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="' + this.duplex + '"');
         }
         if (this.col) {
             // 否则用col的配置，使用record[col]去绑定控件
-            return tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="record[\'' + this.col.replace('.', '\'][\'') + '\']"');
+            tmpl =  tmpl.replace(/ms-duplex="record\[col\]"/g, 'ms-duplex="record[\'' + this.col.replace('.', '\'][\'') + '\']"');
         }
         return tmpl;
     },
     $init: function (vm, el) {
+        if (vm.store && !store[vm.store]) { avalon.error('配置了数据源，但数据源[' + vm.store + ']似乎未定义，/services/storeService.js') }
         
+        if (vm.store) {
+            var dict = store[vm.store].dict || store[vm.store].list;
+            dict({
+                limit: 99999
+            }).then(function (result) {
+                vm.options = result.list;
+            });
+        }
     },
     label: '',
     col: '',
     duplex: '',
     store: '',
     colKey: 'id',
-    colVal: 'name'
+    colVal: 'name',
+    options: []
 });

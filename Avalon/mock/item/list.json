@@ -108,7 +108,7 @@
             "channel": null,
             "buy_count": 102,
             "real_buy_count": 6,
-            "catalog": "好商品"
+            "catalog": "5"
         },
         {
             "id": 1,
@@ -139,7 +139,7 @@
             "channel": null,
             "buy_count": 106,
             "real_buy_count": 10,
-            "catalog": "好旅游品"
+            "catalog": "6"
         }
     ],
     "total": 2,
