@@ -22,7 +22,7 @@ avalon.component('ms:dialog', {
                             label: '保存',
                             className: "btn-blue",
                             callback: function () {
-                                vm.$post({
+                                return vm.$post({
                                     isEdit: vm.isEdit,
                                     record: vm.record.$model
                                 });
