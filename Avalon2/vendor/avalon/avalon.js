@@ -1,0 +1,1 @@
+module.exports = require('avalon2/dist/avalon');
