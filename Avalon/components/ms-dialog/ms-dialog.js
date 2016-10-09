@@ -35,7 +35,10 @@ avalon.component('ms:dialog', {
                             }
                         }
                     }
-                }).on('hidden.bs.modal', function () { vm.show = false; });
+                }).on('hidden.bs.modal', function () { vm.show = false; })
+                .on('shown.bs.modal', function () {
+                    vm.power();
+                });
                 avalon.scan(vm.$dialog.get(0));
             } else {
                 vm.$dialog && vm.$dialog.find('.bootbox-close-button').trigger('click');
@@ -55,5 +58,6 @@ avalon.component('ms:dialog', {
     record: {},
     state: {},
     containerVmId: '',
-    $post: avalon.noop
+    $post: avalon.noop,
+    power: avalon.noop
 });

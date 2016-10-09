@@ -28,6 +28,29 @@ var demo = avalon.define({
     '$data-box_config': {
         store: 'demo',
         dialogId: 'dialog_demo',
+        $validFields: {
+            region_id: {
+                validators: {
+                    notEmpty: {
+                        message: '地区ID不能为空'
+                    }
+                }
+            },
+            region_name: {
+                validators: {
+                    notEmpty: {
+                        message: '地区名称不能为空'
+                    }
+                }
+            },
+            region_parent_id: {
+                validators: {
+                    notEmpty: {
+                        message: '地区PID不能为空'
+                    }
+                }
+            }
+        },
         actionBtns: {
             operation: '<a href="javascript:;" class="btn btn-link btn-xs" ms-click="actions.edit(el)"><i class="fa fa-edit"></i> 编辑</a> ' + 
                 '<a href="javascript:;" class="btn btn-danger btn-xs" ms-click="actions.del(el)"><i class="fa fa-trash-o"></i> 删除</a>'
