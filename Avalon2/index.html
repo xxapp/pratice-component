@@ -4,21 +4,11 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="./static/mod.js"></script>
+    <script src="./static/uilog.js"></script><!-- ignore -->
 </head>
 <body>
     <div ms-controller="root">
-        <h1>{{@version}}</h1>
-
-        <xmp is="ms-container"><div slot="content">
-            <ms-button></ms-button>
-
-            <!--<div ms-controller="dashboard">
-                <ms-button></ms-button>
-            </div>-->
-        </div></xmp>
-        <xmp>
-            <ms-button></ms-button>
-        </xmp>
+        <xmp :widget="{is:'ms-container'}"></xmp>
     </div>
     <script>
         require(['/components/index']);
