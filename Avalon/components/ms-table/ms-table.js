@@ -63,9 +63,9 @@ avalon.component('ms:table', {
                 expr = n.name;
             }
             switch (n.type) {
-                case 'text': return '<td>{{' + expr + '}}</td>';
-                case 'check': return '<td><div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-attr-value="' + expr + '"><span class="text"></span></label></div></td>';
-                case 'action': return '<td>' + expr + '</td>';
+                case 'text': return '{{' + expr + '}}';
+                case 'check': return '<div class="checkbox"><label><input type="checkbox" ms-duplex="checked" ms-attr-value="' + expr + '"><span class="text"></span></label></div></td>';
+                case 'action': return expr;
             }
         });
     },

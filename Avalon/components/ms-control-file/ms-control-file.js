@@ -35,7 +35,7 @@ avalon.component('ms:controlFile', {
         }
     },
     $ready: function (vm, el) {
-        $(el).find('input:file').change(function () {
+        function changeHandler() {
             var inputId = 'file' + vm.$id, val = this.value, index = val.lastIndexOf('\\');
             this.id = inputId;
             $(el).find('input:text').val('文件' + val.substring(index + 1) + '上传中...');
@@ -45,7 +45,10 @@ avalon.component('ms:controlFile', {
                     $(el).find('input:text').val(data.url);
                 }
             });
-        });
+            $(this).replaceWith('<input type="file" name="file">');
+            $(el).find('input:file').change(changeHandler);
+        }
+        $(el).find('input:file').change(changeHandler);
     },
     store: 'file',
     label: '',
