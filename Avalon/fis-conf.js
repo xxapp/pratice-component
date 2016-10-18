@@ -3,7 +3,8 @@ fis.hook('commonjs', {
     paths: {
         avalon: '/vendor/avalon/avalon.js',
         mmState: '/vendor/mmState/mmState.js',
-        jquery: '/vendor/jquery/jquery.js'
+        jquery: '/vendor/jquery/jquery.js',
+        moment: '/vendor/moment/moment.min.js'
     }
 });
 
