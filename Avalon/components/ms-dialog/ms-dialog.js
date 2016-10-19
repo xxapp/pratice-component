@@ -35,13 +35,44 @@ avalon.component('ms:dialog', {
                             }
                         }
                     }
-                }).on('hidden.bs.modal', function () { vm.show = false; })
+                }).on('hidden.bs.modal', function () { 
+                    vm.show = false;
+                    setTimeout(function () {
+                        if ($('.modal.in').length) {
+                            $('body').addClass('modal-open');
+                        } else {
+                            $('body').removeClass('modal-open');
+                        }
+                    }, 100);
+                })
                 .on('shown.bs.modal', function () {
                     vm.power();
                 });
                 avalon.scan(vm.$dialog.get(0));
             } else {
                 vm.$dialog && vm.$dialog.find('.bootbox-close-button').trigger('click');
+            }
+        });
+        vm.$watch('valid', function (newV) {
+            if (!this.$dialog) return ;
+            var $confirmBtn = this.$dialog.find('.modal-footer > button[data-bb-handler=save]');
+            if (newV) {
+                // 去掉确定按钮的disabled属性
+                $confirmBtn.removeAttr('disabled');
+            } else {
+                // 给确定按钮加上disabled属性
+                $confirmBtn.attr('disabled', 'disabled');
+            }
+        });
+        vm.$watch('uploading', function (newV) {
+            if (!this.$dialog) return ;
+            var $confirmBtn = this.$dialog.find('.modal-footer > button[data-bb-handler=save]');
+            if (!newV) {
+                // 去掉确定按钮的disabled属性
+                $confirmBtn.removeAttr('disabled');
+            } else {
+                // 给确定按钮加上disabled属性
+                $confirmBtn.attr('disabled', 'disabled');
             }
         });
     },
@@ -55,6 +86,8 @@ avalon.component('ms:dialog', {
     size: '',
     title: '',
     isEdit: false,
+    valid: true,
+    uploading: false,
     record: {},
     state: {},
     containerVmId: '',

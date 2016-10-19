@@ -47,6 +47,14 @@ avalon.component('ms:dataBox', {
             vm.$query = avalon.mix(vm.$query, params);
             entityStore.list(vm.$query).then(function (result) {
                 cb && cb();
+                if (vm.$query.start == 0) {
+                    for (var i in vm.$refs) {
+                        if (vm.$refs.hasOwnProperty(i) && i.indexOf('pagination') == 0) {
+                            vm.$refs[i].currentPage = 1;
+                            break;
+                        }
+                    }
+                }
                 beyond.hideLoading();
                 // 更新vm
                 vm.list = result.list;
@@ -57,6 +65,7 @@ avalon.component('ms:dataBox', {
         if (dialogVm) {
             dialogVm.power = function () {
                 dialogVm.$dialog.find('form').bootstrapValidator({
+                    excluded: [],
                     feedbackIcons: {
                         valid: 'glyphicon glyphicon-ok',
                         invalid: 'glyphicon glyphicon-remove',
@@ -66,32 +75,54 @@ avalon.component('ms:dataBox', {
                         // Do nothing
                     },
                     fields: vm.$validFields
+                }).on('success.field.bv', function(e, data) {
+                    if (data.bv.getInvalidFields().length > 0) {
+                        dialogVm.valid = false;
+                    } else {
+                        dialogVm.valid = true;
+                    }
+                }).on('error.field.bv', function (e, data) {
+                    if (data.bv.getInvalidFields().length > 0) {
+                        dialogVm.valid = false;
+                    } else {
+                        dialogVm.valid = true;
+                    }
                 });
             }
             dialogVm.$post = function (package) {
                 dialogVm.$dialog.find('form').data('bootstrapValidator').validate()
                 if (!dialogVm.$dialog.find('form').data('bootstrapValidator').isValid()) {
+                    dialogVm.valid = false;
                     return false;
+                } else {
+                    dialogVm.valid = true;
                 }
+                if (dialogVm.uploading) return false;
+                dialogVm.uploading = true;
                 vm.processData(package, function (handleResult) {
                     if (!package.isEdit) {
                         entityStore.insert(package.record).then(function (r) {
                             if (r.code == '0') {
                                 Notify('添加成功', 'top-right', '5000', 'success', 'fa-check', true);
                                 vm.loadData();
+                                dialogVm.show = false;
                             }
                             handleResult(r);
+                            setTimeout(function () { dialogVm.uploading = false; }, 1000);
                         });
                     } else {
                         entityStore.update(package.record).then(function (r) {
                             if (r.code == '0') {
                                 Notify('修改成功', 'top-right', '5000', 'success', 'fa-check', true);
                                 vm.loadData();
+                                dialogVm.show = false;
                             }
                             handleResult(r);
+                            setTimeout(function () { dialogVm.uploading = false; }, 1000);
                         });
                     }
                 });
+                return false;
             }
         }
     },

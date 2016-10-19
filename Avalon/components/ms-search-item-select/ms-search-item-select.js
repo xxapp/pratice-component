@@ -26,7 +26,7 @@ avalon.component('ms:searchItemSelect', {
     $$template: function (tmpl) {
         var vm = this;
         if (vm.store) {
-            tmpl = tmpl.replace(/\{\{content\|html\}\}/g, '<option ms-repeat="options" ms-attr-value="el.' + vm.colKey + '">{{el.' + vm.colVal + '}}</option>');
+            tmpl = tmpl.replace(/\{\{content\|html\}\}/g, '<option value="">-选择-</option><option ms-repeat="options" ms-attr-value="el.' + vm.colKey + '">{{el.' + vm.colVal + '}}</option>');
         }
         return tmpl;
     },
