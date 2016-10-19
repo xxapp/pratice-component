@@ -42,7 +42,7 @@ avalon.component('ms:controlFile', {
             store.file.insert({
                 fileElementId: inputId,
                 success: function (data, status) {
-                    $(el).find('input:text').val(data.url);
+                    $(el).find('input:text').val(data);
                 }
             });
             $(this).replaceWith('<input type="file" name="file">');
@@ -54,5 +54,6 @@ avalon.component('ms:controlFile', {
     label: '',
     col: '',
     duplex: '',
+    placeholder: '',
     btnText: '选择文件'
 });
