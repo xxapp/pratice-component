@@ -42,7 +42,7 @@ avalon.component('ms:controlFile', {
             store.file.insert({
                 fileElementId: inputId,
                 success: function (data, status) {
-                    $(el).find('input:text').val(data);
+                    $(el).find('input:text').val(data).trigger('input');
                 }
             });
             $(this).replaceWith('<input type="file" name="file">');

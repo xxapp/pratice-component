@@ -63,39 +63,9 @@ avalon.component('ms:dataBox', {
             });
         }
         if (dialogVm) {
-            dialogVm.power = function () {
-                dialogVm.$dialog.find('form').bootstrapValidator({
-                    excluded: [],
-                    feedbackIcons: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    submitHandler: function (validator, form, submitButton) {
-                        // Do nothing
-                    },
-                    fields: vm.$validFields
-                }).on('success.field.bv', function(e, data) {
-                    if (data.bv.getInvalidFields().length > 0) {
-                        dialogVm.valid = false;
-                    } else {
-                        dialogVm.valid = true;
-                    }
-                }).on('error.field.bv', function (e, data) {
-                    if (data.bv.getInvalidFields().length > 0) {
-                        dialogVm.valid = false;
-                    } else {
-                        dialogVm.valid = true;
-                    }
-                });
-            }
             dialogVm.$post = function (package) {
-                dialogVm.$dialog.find('form').data('bootstrapValidator').validate()
-                if (!dialogVm.$dialog.find('form').data('bootstrapValidator').isValid()) {
-                    dialogVm.valid = false;
+                if (!dialogVm.$beforePost()) {
                     return false;
-                } else {
-                    dialogVm.valid = true;
                 }
                 if (dialogVm.uploading) return false;
                 dialogVm.uploading = true;
@@ -137,7 +107,6 @@ avalon.component('ms:dataBox', {
     },
     store: '',
     dialogId: '',
-    $validateFields: {},
     list: [],
     $query: {
         start: 0,

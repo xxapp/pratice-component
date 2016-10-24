@@ -9,6 +9,43 @@ avalon.component('ms:dialog', {
     $replace: 0,
     onInit: avalon.noop,
     $init: function (vm, el) {
+        vm.power = function () {
+            !vm.novalidate && vm.$dialog.find('form').bootstrapValidator({
+                excluded: [],
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                submitHandler: function (validator, form, submitButton) {
+                    // Do nothing
+                },
+                fields: vm.$validateFields
+            }).on('success.field.bv', function(e, data) {
+                if (data.bv.getInvalidFields().length > 0) {
+                    vm.valid = false;
+                } else {
+                    vm.valid = true;
+                }
+            }).on('error.field.bv', function (e, data) {
+                if (data.bv.getInvalidFields().length > 0) {
+                    vm.valid = false;
+                } else {
+                    vm.valid = true;
+                }
+            });
+        }
+        vm.$beforePost = function () {
+            if (vm.novalidate) return true;
+            vm.$dialog.find('form').data('bootstrapValidator').validate();
+            if (!vm.$dialog.find('form').data('bootstrapValidator').isValid()) {
+                vm.valid = false;
+                return false;
+            } else {
+                vm.valid = true;
+                return true;
+            }
+        }
         vm.$watch('show', function (newV) {
             var header = $(vm.header).children().text();
             if (newV) {
@@ -86,11 +123,14 @@ avalon.component('ms:dialog', {
     size: '',
     title: '',
     isEdit: false,
+    novalidate: false,
     valid: true,
     uploading: false,
     record: {},
     state: {},
+    $validateFields: {},
     containerVmId: '',
     $post: avalon.noop,
-    power: avalon.noop
+    power: avalon.noop,
+    $beforePost: avalon.noop
 });
