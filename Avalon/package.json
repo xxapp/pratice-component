@@ -9,8 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.8.tar.gz",
-    "bootbox.js": "https://github.com/makeusabrew/bootbox/archive/v4.3.0.tar.gz"
+    "avalonjs": "https://github.com/RubyLouvre/avalon/archive/1.5.8.tar.gz"
   },
   "devDependencies": {
     "fis3-hook-commonjs": "^0.1.25",
