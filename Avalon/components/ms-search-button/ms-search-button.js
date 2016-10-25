@@ -8,6 +8,7 @@ avalon.component('ms:searchButton', {
     $init: function (vm) {
         vm.search = function () {
             var containerVm = avalon.vmodels[vm.$containerVmId];
+            containerVm.$dirtyQuery.start = 0;
             containerVm.loadData(function () {
                 containerVm.$query = avalon.mix(containerVm.$query, containerVm.$dirtyQuery);
             }, containerVm.$dirtyQuery);

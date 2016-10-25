@@ -41,13 +41,13 @@ avalon.component('ms:controlDatepicker', {
         var datepickerId = 'picker' + vm.$id, datepicker;
         var $input = $(el).find('input:hidden');
         vm.$datepickerId = datepickerId; 
-        datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val($input.val());
+        datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val(moment($input.val()).format());
         datepicker.datetimepicker({
             format: vm.format,
             showClose: false
         });
         datepicker.on('dp.change', function (e) {
-            $input.val(e.target.value);
+            $input.val(moment(e.target.value).utc().format());
             datepicker.trigger('input');
         });
     },
@@ -80,13 +80,13 @@ avalon.component('ms:controlDatetimepicker', {
         var datepickerId = 'picker' + vm.$id, datepicker;
         var $input = $(el).find('input.hidden');
         vm.$datepickerId = datepickerId; 
-        datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val($input.val());
+        datepicker = $(el).find('input.date-picker').attr('id', datepickerId).val(moment($input.val()).format());
         datepicker.datetimepicker({
             format: vm.format,
             showClose: true
         });
         datepicker.on('dp.change', function (e) {
-            $input.val(moment(e.target.value).format('YYYY-MM-DDTHH:mm:ss') + 'Z');
+            $input.val(moment(e.target.value).utc().format());
             datepicker.trigger('input');
         });
     },

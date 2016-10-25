@@ -32,7 +32,7 @@ avalon.component('ms:searchItemDatepicker', {
             format: vm.format
         });
         datepicker.on('dp.change', function (e) {
-            $input.val(e.target.value);
+            $input.val(moment(e.target.value).utc().format());
         });
         vm.$watch('val', function (newV) {
             var containerVm = avalon.vmodels[vm.$containerVmId];
@@ -62,7 +62,7 @@ avalon.component('ms:searchItemDatetimepicker', {
             showClose: true
         });
         datepicker.on('dp.change', function (e) {
-            $input.val(moment(e.target.value).format('YYYY-MM-DDTHH:mm:ss') + 'Z');
+            $input.val(moment(e.target.value).utc().format());
         });
         vm.$watch('val', function (newV) {
             var containerVm = avalon.vmodels[vm.$containerVmId];
